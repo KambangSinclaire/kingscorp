@@ -1,0 +1,37 @@
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card {
+  @apply w-1/3 p-5  mx-2 my-8 bg-white rounded-lg;
+}
+.form-control {
+  @apply p-5 rounded-xl border text-gray-500 w-full outline-none my-5;
+}
+.form-container {
+  @apply w-1/2 m-auto flex flex-col justify-center items-center p-8 rounded;
+}
+.medium-center-header {
+  @apply text-gray-600 text-center text-2xl;
+}
+
+.white-medium-center-header {
+  @apply text-white text-center text-2xl;
+}
+
+.basic-blue-gradient {
+  @apply bg-gradient-to-r from-blue-400 via-blue-500 to-blue-500;
+}
+
+.app-btn {
+  @apply px-8 py-2 bg-gradient-to-r from-red-300 via-blue-500 to-blue-700 rounded-3xl outline-none cursor-pointer font-bold text-white hover:to-pink-500;
+}
+
+.nav-items{
+    @apply w-full;
+}
+
+.sidebar-nav-items{
+    @apply px-10 py-8 text-xl text-gray-700 w-3/4 flex justify-around items-center my-2 m-auto cursor-pointer hover:bg-blue-500;
+}
