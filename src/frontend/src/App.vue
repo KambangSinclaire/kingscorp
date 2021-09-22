@@ -1,6 +1,6 @@
 <template>
-  <div id="nav" class="bg-gradient-to-r from-red-400 via-blue-500 to-blue-900">
-    helllo.....
+  <div id="nav" class="bg-gradient-to-r from-gray-200 via-gray-400 to-blue-400">
+     <Navbar />
   </div>
   <Home />
 </template>
@@ -8,12 +8,21 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import Home from "@/views/Home.vue";
+import Navbar from "@/components/Navbar.vue";
+import ElectronUI from "@/utils/electron.util.ts";
 @Options({
   components: {
     Home,
+    Navbar
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+   mounted() {
+    ElectronUI.ipcRenderer.on("alert", (data:any) => {
+      alert("Hello here ");
+    });
+  }
+}
 </script>
 
 <style lang="scss">

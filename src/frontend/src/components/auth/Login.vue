@@ -19,7 +19,7 @@
         placeholder="Enter information here"
       />
 
-      <button class="app-btn">Login</button>
+      <button class="app-btn" @click.prevent="login">Login</button>
 
       <small class="text-white relative top-4">We celebrate you!</small>
     </form>
@@ -28,9 +28,26 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import ElectronUI from "@/utils/electron.util.ts";
 
 @Options({})
-export default class Login extends Vue {}
+export default class Login extends Vue {
+  data() {
+    return {
+      login: () => {
+        // ElectronUI.ipcRenderer.on("alert", (data:any) => {
+        //   alert("Hello here ");
+        // });
+        console.log("Sent the message");
+        ElectronUI.ipcRenderer.send("login", "hello Sir");
+      },
+    };
+  }
+
+  mounted() {
+      ElectronUI.ipcRenderer.send("alert", "hello Sir");
+  }
+}
 </script>
 
 <style lang="scss" scoped>

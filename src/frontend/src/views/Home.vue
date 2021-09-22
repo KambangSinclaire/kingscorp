@@ -4,7 +4,7 @@
     <section class="sidebar w-1/4">
       <Sidebar />
     </section>
-    <section class="home w-3/4 bg-gray-500">
+    <section class="home w-3/4 bg-gray-200">
       <!-- <Welcome :msg="message" /> -->
       <router-view />
     </section>
