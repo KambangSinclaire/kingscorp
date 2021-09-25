@@ -1,35 +1,49 @@
 import { app, BrowserWindow, ipcMain, ipcRenderer } from "electron";
 import * as path from "path";
+import * as IPC_MAIN from "./lib/ipc-manager.lib";
+import { UserManager } from "./controller/management/user management/user.manager";
+import { Connection } from "typeorm";
+import config from "./config/app.config";
+import "reflect-metadata";
+
+
 
 class KingsCorp {
 
     private mainWindow: BrowserWindow | any;
+    private DatabaseConnection!: Connection;
 
     constructor() {
         this.startApplication();
     }
 
-    startApplication() {
-        const that = this;
+    async startApplication() {
+        this.DatabaseConnection = await config.database();
+
         app.whenReady().then(() => {
-            const win = that.createWindow({});
-            this.sendActionToRenderer(this.getMainAppWindow, "alert", { name: "Helloooo" });
+            const win = KingsCorp.createWindow({});
             this.setMainAppWindow = win;
+            KingsCorp.sendActionToRenderer(this.getMainAppWindow, "alert", { name: "Helloooo" });
             app.on('activate', () => {
                 if (BrowserWindow.getAllWindows().length === 0) {
-                    that.createWindow({})
+                    KingsCorp.createWindow({})
                 }
             })
         });
 
-        ipcMain.on('login', (data: any) => {
-           this.createWindow({});
-        });
+        /**
+         * EVENT LISTENER (APPLICATION EVENT ROUTER)
+         */
+        IPC_MAIN.default(this.DatabaseConnection);
 
-        this.closeApplication();
+
+        KingsCorp.closeApplication();
     }
 
-    closeApplication() {
+    /**
+     * Close an active window
+     */
+    public static closeApplication() {
         app.on('window-all-closed', () => {
             if (process.platform !== 'darwin') {
                 app.quit()
@@ -37,14 +51,25 @@ class KingsCorp {
         })
     }
 
-    sendActionToRenderer(win: BrowserWindow, action: string, payload?: any) {
+    /**
+     * 
+     * @param win 
+     * @param action 
+     * @param payload 
+     */
+    public static sendActionToRenderer(win: BrowserWindow, action: string, payload?: any) {
         win.webContents.send(action, payload);
     }
 
-    createWindow(options: { width?: number, height?: number, viewPath?: string, preloadPath?: string }) {
+    /**
+     * 
+     * @param options 
+     * @returns 
+     */
+    public static createWindow(options: { width?: number, height?: number, viewPath?: string, preloadPath?: string }) {
         const win = new BrowserWindow({
-            width: options.width ?? 800,
-            height: options.height ?? 600,
+            width: options.width ?? 1000,
+            height: options.height ?? 800,
             webPreferences: {
                 nodeIntegration: true,
                 contextIsolation: false,
