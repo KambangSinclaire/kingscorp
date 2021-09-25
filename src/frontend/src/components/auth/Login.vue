@@ -28,24 +28,27 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import ElectronUI from "@/utils/electron.util.ts";
+import IPC from "../../utils/ipc-renderer.util";
+import { AppActionEvents } from "../../events/app.events";
 
 @Options({})
 export default class Login extends Vue {
   data() {
     return {
       login: () => {
-        // ElectronUI.ipcRenderer.on("alert", (data:any) => {
-        //   alert("Hello here ");
-        // });
-        console.log("Sent the message");
-        ElectronUI.ipcRenderer.send("login", "hello Sir");
+        IPC.ipcRequestTrigger(AppActionEvents.user.login, {});
       },
     };
   }
 
   mounted() {
-      ElectronUI.ipcRenderer.send("alert", "hello Sir");
+    IPC.ipcResponseHandler(
+      AppActionEvents.user.login,
+      (event: any, payload: any) => {
+        console.log(event);
+        console.log(payload);
+      }
+    );
   }
 }
 </script>

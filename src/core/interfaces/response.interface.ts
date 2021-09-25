@@ -1,11 +1,16 @@
+import { BrowserWindow } from "electron";
+
 /**
  * EXPECTING MORE FIELDS IN THE LONG RUN
  */
 export interface ResponsePayload {
     status: number;
     message: string;
-    payload: {
+    payload?: {
         data: [],
-        platform: string;
-    }
+    };
+    platform:{
+        window:BrowserWindow,
+        actionEvent:string
+    };
 }

@@ -1,7 +1,6 @@
-import { app, BrowserWindow, ipcMain, ipcRenderer } from "electron";
+import { app, BrowserWindow } from "electron";
 import * as path from "path";
 import * as IPC_MAIN from "./lib/ipc-manager.lib";
-import { UserManager } from "./controller/management/user management/user.manager";
 import { Connection } from "typeorm";
 import config from "./config/app.config";
 import "reflect-metadata";
@@ -23,19 +22,21 @@ class KingsCorp {
         app.whenReady().then(() => {
             const win = KingsCorp.createWindow({});
             this.setMainAppWindow = win;
-            KingsCorp.sendActionToRenderer(this.getMainAppWindow, "alert", { name: "Helloooo" });
+
+
+            /**
+             * EVENT LISTENER - (APPLICATION EVENT ROUTER)
+             */
+            IPC_MAIN.default(this.DatabaseConnection, win);
+
+
+
             app.on('activate', () => {
                 if (BrowserWindow.getAllWindows().length === 0) {
                     KingsCorp.createWindow({})
                 }
             })
         });
-
-        /**
-         * EVENT LISTENER (APPLICATION EVENT ROUTER)
-         */
-        IPC_MAIN.default(this.DatabaseConnection);
-
 
         KingsCorp.closeApplication();
     }
@@ -51,15 +52,7 @@ class KingsCorp {
         })
     }
 
-    /**
-     * 
-     * @param win 
-     * @param action 
-     * @param payload 
-     */
-    public static sendActionToRenderer(win: BrowserWindow, action: string, payload?: any) {
-        win.webContents.send(action, payload);
-    }
+
 
     /**
      * 

@@ -1,11 +1,11 @@
-import { ipcMain } from "electron";
+import { BrowserWindow, ipcMain } from "electron";
 import { Connection } from "typeorm";
 import { UserManager } from "../controller/management/user management/user.manager";
 import { UserEntity } from "../database/entities/user.entity";
-import { ActionEvents } from "../events/app.events";
+import { AppActionEvents } from "../events/app.events";
 
 
-const ipcIncommingMessageHandler = (dbConnection: Connection) => {
+const ipcIncommingMessageHandler = (dbConnection: Connection, actionWindow: BrowserWindow) => {
 
     // CHANNEL HANDLER
     const channelHandler = (channel: string, handler: any) => {
@@ -18,7 +18,11 @@ const ipcIncommingMessageHandler = (dbConnection: Connection) => {
     let userManager = new UserManager();
     UserManager.entity = new UserEntity();
     UserManager.dbConnection = dbConnection;
-    channelHandler(ActionEvents.user.login, userManager.addUser)
+    UserManager.window = actionWindow;
+
+
+    UserManager.actionEvent = AppActionEvents.user.login;
+    channelHandler(AppActionEvents.user.login, userManager.addUser)
 
 
 

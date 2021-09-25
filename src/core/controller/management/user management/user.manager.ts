@@ -1,16 +1,18 @@
+/**
+ * Author : @Sinclaire 2021
+ */
 
 import { Connection, Repository } from "typeorm";
 import { UserEntity } from "../../../database/entities/user.entity";
 import retrieveEntity from "../../../utils/retrieve-entity.util";
-import { ResponsePayload } from "../../../interfaces/response.interface";
+import { ResponseStatus } from "../../../constants/response-status.constants";
+import { responseHandler } from "../../../middlewares/response.handler";
+import { BrowserWindow } from "electron";
+import AbstractBaseManager from "../AbstractBaseManager";
 
-export class UserManager {
+export class UserManager extends AbstractBaseManager {
 
-    static entity: UserEntity;
-    static dbConnection: Connection;
-    static repository: Repository<UserEntity | any>;
-
-    async addUser(event: Event, userData: UserEntity): Promise<ResponsePayload> {
+    async addUser(event: Event, userData: UserEntity) {
         let user = UserManager.entity;
         UserManager.repository = retrieveEntity(UserEntity, UserManager.dbConnection);
         user = {
@@ -31,10 +33,30 @@ export class UserManager {
 
         try {
             const newUser = await UserManager.repository.save(user);
-            console.log("Created user is ", newUser);
-            return newUser;
+
+            console.log("Created new user", newUser);
+
+            responseHandler({
+                status: ResponseStatus.OK,
+                message: "New user added",
+                payload: {data:newUser},
+                platform: {
+                    window: UserManager.window,
+                    actionEvent: UserManager.actionEvent
+                }
+            });
+
         } catch (error: any) {
-            return error.message
+
+            responseHandler({
+                status: ResponseStatus.BAD_REQUEST,
+                message: error.message,
+                platform: {
+                    window: UserManager.window,
+                    actionEvent: UserManager.actionEvent
+                }
+            });
+
         }
     }
 }
