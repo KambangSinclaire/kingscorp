@@ -1,10 +1,10 @@
 <template>
  <div class="main-container flex w-full overflow-hidden">
   <!-- <div class="main-container flex max-w-max overflow-hidden"> THIS IS THE REAL AND BEST ACCEPTED DESIGN -->
-    <section class="sidebar w-1/4">
+    <section class="sidebar w-1/6">
       <Sidebar />
     </section>
-    <section class="home w-3/4 bg-gray-200">
+    <section class="home w-5/6 bg-gray-200">
       <!-- <Welcome :msg="message" /> -->
       <router-view />
     </section>

@@ -1,5 +1,5 @@
 <template>
-  <div id="nav" class="bg-gradient-to-r from-gray-200 via-gray-400 to-blue-400">
+  <div id="nav" class=" bg-blue-400">
      <Navbar />
   </div>
   <Home />
@@ -35,7 +35,7 @@ export default class App extends Vue {
 }
 
 #nav {
-  padding: 30px;
+  padding: 40px;
 
   a {
     font-weight: bold;

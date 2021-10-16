@@ -35,8 +35,13 @@ import { AppActionEvents } from "../../events/app.events";
 export default class Login extends Vue {
   data() {
     return {
+      // user: {
+      //   username,
+      //   email,
+      //   password,
+      // },
       login: () => {
-        IPC.ipcRequestTrigger(AppActionEvents.user.login, {});
+        IPC.ipcRequestTrigger(AppActionEvents.user.login,{});
       },
     };
   }

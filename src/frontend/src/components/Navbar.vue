@@ -2,11 +2,79 @@
   <section>
     <nav class="">
       <ul class="nav-list flex">
-        <li class="nav-items cursor-pointer hover:text-gray-700 transition-opacity">Stock</li>
-        <li class="nav-items cursor-pointer hover:text-gray-700 transition-opacity">Sales</li>
-        <li class="nav-items cursor-pointer hover:text-gray-700 transition-opacity">Credits</li>
-        <li class="nav-items cursor-pointer hover:text-gray-700 transition-opacity">Invoices</li>
-        <li class="nav-items cursor-pointer hover:text-gray-700 transition-opacity">Profile</li>
+        <!-- <li
+          class="
+            nav-items
+            cursor-pointer
+            hover:text-gray-700
+            transition-opacity
+          "
+        >
+        <router-link to="Stock">
+          Stock
+        </router-link>
+        </li>
+        <li
+          class="
+            nav-items
+            cursor-pointer
+            hover:text-gray-700
+            transition-opacity
+          "
+        >
+        <router-link to="Sales">
+          Sales
+        </router-link>
+        </li>
+        <li
+          class="
+            nav-items
+            cursor-pointer
+            hover:text-gray-700
+            transition-opacity
+          "
+        >
+        <router-link to="Credits">
+          Credits
+        </router-link>
+        </li>
+        <li
+          class="
+            nav-items
+            cursor-pointer
+            hover:text-gray-700
+            transition-opacity
+          "
+        >
+        <router-link to="Invoice">
+          Invoices
+        </router-link>
+        </li> -->
+        <li
+          class="
+            nav-items
+            cursor-pointer
+            hover:text-gray-700
+            transition-opacity
+          "
+        >
+        <router-link to="/personnel">
+          Personnels
+        </router-link>
+        </li>
+
+          <li
+          class="
+            nav-items
+            cursor-pointer
+            hover:text-gray-700
+            transition-opacity
+          "
+        >
+        <router-link to="/login">
+          Login
+        </router-link>
+        </li>
       </ul>
     </nav>
   </section>

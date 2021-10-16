@@ -6,11 +6,17 @@
 .card {
   @apply w-1/3 p-5  mx-2 my-8 bg-white rounded-lg;
 }
+.summary-cards{
+  @apply flex justify-evenly items-center bg-gradient-to-r from-white via-gray-200 to-gray-400;
+}
+.app-custom-gradient{
+  @apply bg-gradient-to-r from-white via-gray-200 to-gray-400
+}
 .form-control {
-  @apply p-5 rounded-xl border text-gray-500 w-full outline-none my-5;
+  @apply p-5 rounded-xl border text-gray-700 w-full outline-none my-5;
 }
 .form-container {
-  @apply w-1/2 m-auto flex flex-col justify-center items-center p-8 rounded;
+  @apply m-auto flex flex-col justify-center items-center rounded;
 }
 .medium-center-header {
   @apply text-gray-600 text-center text-2xl;
@@ -33,5 +39,14 @@
 }
 
 .sidebar-nav-items{
-    @apply px-10 py-8 text-xl text-gray-700 w-3/4 flex justify-around items-center my-2 m-auto cursor-pointer hover:bg-blue-500;
+    @apply px-10 py-8 text-xl text-gray-700 w-3/4 flex justify-around items-center my-2 m-auto cursor-pointer hover:bg-gray-500;
 }
+
+.icons{
+  @apply cursor-pointer hover:bg-green-400;
+  /* padding: 5px; */
+}
+.alert-modal  {
+  top: -54rem;
+  left: 23rem;
+  }
