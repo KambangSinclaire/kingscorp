@@ -1,8 +1,8 @@
 <template>
-  <div id="nav" class=" bg-blue-400">
+  <div id="nav" class="bg-gradient-to-r from-gray-100 via-gray-200 to-gray-200">
      <Navbar />
   </div>
-  <Home />
+  <Home id="nav"/>
 </template>
 
 <script lang="ts">
@@ -35,14 +35,12 @@ export default class App extends Vue {
 }
 
 #nav {
-  padding: 40px;
-
+  padding: 0px 40px 40px 40px;
   a {
     font-weight: bold;
     color: #2c3e50;
-
     &.router-link-exact-active {
-      color: #42b983;
+      color: #448bf7;
     }
   }
 }

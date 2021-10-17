@@ -2,9 +2,10 @@
   <Listing
     :listData="personnels"
     :listingTitles="titles"
-    :options="{ actions: true }"
+    :options="{ actions: true, inputs,name }"
     @fetchDropDownIcons="upDateActions"
   />
+  <!-- event above @fetchDropDownIcons is used to mutate the state of the dropdown in each component -->
 </template>
 
 <script>
@@ -18,25 +19,25 @@ import Listing from "../../reusable/Listing.vue";
     upDateActions() {
       let dropDowns = [
         {
-          icon: "hello test",
-          title: "analysis",
-          url: "/login",
-        },
-       {
-          icon: "hello test",
+          icon: "@/assets/feather_icons/users.svg",
           title: "analysis",
           url: "/login",
         },
         {
-          icon: "hello test",
-          title: "analysis",
+          icon: "@/assets/feather_icons/users.svg",
+          title: "history",
+          url: "/",
+        },
+        {
+          icon: "@/assets/feather_icons/users.svg",
+          title: "statistics",
+          url: "/",
+        },
+        {
+          icon: "@/assets/feather_icons/users.svg",
+          title: "status",
           url: "/login",
         },
-       {
-          icon: "hello test",
-          title: "analysis",
-          url: "/login",
-        }
       ];
       this.$store.dispatch("upDropdownActions", dropDowns);
     },
@@ -46,6 +47,14 @@ export default class Personnel extends Vue {
   data() {
     return {
       titles: ["Name", "Role", "Status", "Group", "Created"],
+      inputs: {
+        name: "text",
+        role: "select",
+        group: "select",
+        created: "date",
+        status: "checkbox",
+      },
+      name:"Personnel",
       personnels: [
         {
           name: "Kambang Sinclaire",

@@ -73,56 +73,56 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/about",
     name: "About",
-   component:About
+    component: About
   },
   {
     path: "/logout",
     name: "Logout",
-   component:About
+    component: Welcome
   },
   {
     path: "/profile",
     name: "Profile",
-   component:Profile
+    component: Profile
   },
   {
     path: "/signup",
     name: "Signup",
-   component:About
+    component: About
   },
   {
     path: "/settings",
     name: "Settings",
-   component:Settings,
-   children:[
-     {
-       path:"",
-       name:"Roles",
-       component:Roles
-     },
-     {
-      path:"permissions",
-      name:"Permissions",
-      component:Permissions
-    },
-    {
-      path:"groups",
-      name:"Groups",
-      component:Groups
-    },
-    {
-      path:"preferences",
-      name:"Preferences",
-      component:Preferences
-    }
-   ]
+    component: Settings,
+    children: [
+      {
+        path: "",
+        name: "Roles",
+        component: Roles
+      },
+      {
+        path: "permissions",
+        name: "Permissions",
+        component: Permissions
+      },
+      {
+        path: "groups",
+        name: "Groups",
+        component: Groups
+      },
+      {
+        path: "preferences",
+        name: "Preferences",
+        component: Preferences
+      }
+    ]
   }
   // {
   //   path: "/",
   //   name: "Home",
   //   component: Home,
   // },
-  
+
   // LAZY LOADING -> GREAT FOR WEB APPS
   // {
   //   path: "/about",
