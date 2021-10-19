@@ -1,5 +1,7 @@
 <template>
-  <section class="sidebar w-full h-full bg-white bg-gradient-to-r app-custom-gradient">
+  <section
+    class="sidebar w-full h-full bg-white bg-gradient-to-r app-custom-gradient"
+  >
     <div class="side-links flex flex-col items-center justify-center">
       <div class="nav-items">
         <router-link to="/" class="sidebar-nav-items">
@@ -130,8 +132,8 @@ export default class Sidebar extends Vue {
 </script>
 
 <style scoped lang="scss">
-.sidebar{
+.sidebar {
   border-right: 1px solid #8080802e;
-  cursor:w-resize;
+  cursor: w-resize;
 }
 </style>

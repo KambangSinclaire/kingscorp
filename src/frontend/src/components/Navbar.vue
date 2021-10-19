@@ -1,9 +1,10 @@
 <template>
   <section>
     <nav class="flex justify-between items-center pt-8">
+      <!-- LOGO HERE -->
       <router-link to="/">
         <div class="logo-section w-40">
-          <img src="@/assets/logo.jpg" alt="logo" class="w-full" />
+          <!-- <img src="@/assets/logo.jpg" alt="logo" class="w-full" /> -->
         </div>
       </router-link>
       <ul class="nav-list flex">

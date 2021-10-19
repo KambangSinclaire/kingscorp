@@ -1,5 +1,5 @@
 <template>
- <div class="main-container flex w-full overflow-hidden">
+ <div class="main-container flex w-full">
   <!-- <div class="main-container flex max-w-max overflow-hidden"> THIS IS THE REAL AND BEST ACCEPTED DESIGN -->
     <section class="sidebar w-1/6">
       <Sidebar />

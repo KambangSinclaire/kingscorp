@@ -3,7 +3,7 @@
  */
 
 import { Connection, Repository } from "typeorm";
-import { UserEntity } from "../../../database/entities/user.entity";
+import { UserEntity } from "../../../database/models/entities/user.entity";
 import retrieveEntity from "../../../utils/retrieve-entity.util";
 import { ResponseStatus } from "../../../constants/response-status.constants";
 import { responseHandler } from "../../../middlewares/response.handler";
@@ -36,26 +36,36 @@ export class UserManager extends AbstractBaseManager {
 
             console.log("Created new user", newUser);
 
-            responseHandler({
+            return {
                 status: ResponseStatus.OK,
                 message: "New user added",
-                payload: {data:newUser},
+                payload: { data: newUser },
                 platform: {
                     window: UserManager.window,
                     actionEvent: UserManager.actionEvent
                 }
-            });
+            }
+
+            // responseHandler({
+            //     status: ResponseStatus.OK,
+            //     message: "New user added",
+            //     payload: {data:newUser},
+            //     platform: {
+            //         window: UserManager.window,
+            //         actionEvent: UserManager.actionEvent
+            //     }
+            // });
 
         } catch (error: any) {
 
-            responseHandler({
+            return {
                 status: ResponseStatus.BAD_REQUEST,
                 message: error.message,
                 platform: {
                     window: UserManager.window,
                     actionEvent: UserManager.actionEvent
                 }
-            });
+            };
 
         }
     }

@@ -1,8 +1,8 @@
 <template>
   <div id="nav" class="bg-gradient-to-r from-gray-100 via-gray-200 to-gray-200">
-     <Navbar />
+    <Navbar />
   </div>
-  <Home id="nav"/>
+  <Home id="nav" />
 </template>
 
 <script lang="ts">
@@ -13,16 +13,27 @@ import ElectronUI from "@/utils/electron.util.ts";
 @Options({
   components: {
     Home,
-    Navbar
+    Navbar,
+  },
+  computed: {
+    wait() {
+      ElectronUI.ipcRenderer.on("getProducts", (data: any) => {
+        alert("Hello here ");
+      });
+    },
+  },
+  watch: {
+    wait2() {
+      ElectronUI.ipcRenderer.on("getProducts", (data: any) => {
+        alert("Hello here ");
+      });
+    },
+  },
+  updated() {
+    this.wait2;
   },
 })
-export default class App extends Vue {
-   mounted() {
-    ElectronUI.ipcRenderer.on("alert", (data:any) => {
-      alert("Hello here ");
-    });
-  }
-}
+export default class App extends Vue {}
 </script>
 
 <style lang="scss">
@@ -35,7 +46,7 @@ export default class App extends Vue {
 }
 
 #nav {
-  padding: 0px 40px 40px 40px;
+  // padding: 0px 40px 40px 40px;
   a {
     font-weight: bold;
     color: #2c3e50;

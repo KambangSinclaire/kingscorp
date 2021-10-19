@@ -69,7 +69,8 @@ class KingsCorp {
                 preload: path.join(__dirname, options.preloadPath ?? 'preload.js'),
             }
         });
-        win.loadFile(path.join(__dirname, options.viewPath ?? "../src/frontend/dist/index.html"));
+        // win.loadFile(path.join(__dirname, options.viewPath ?? "../src/frontend/dist/index.html"));
+        win.loadURL("http://localhost:8080/");
         return win;
     }
 

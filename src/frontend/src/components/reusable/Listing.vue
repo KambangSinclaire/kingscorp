@@ -1,12 +1,15 @@
 <template>
   <section class="parent-container">
-    <div class="list-container w-full bg-white pt-8 h-screen" :class="{'bg-gray-500': openAddForm || openDeleteForm || openEditForm || openDetailsForm}">
+    <div
+      class="list-container w-full bg-white pt-8"
+      :class="{
+        'bg-gray-500':
+          openAddForm || openDeleteForm || openEditForm || openDetailsForm,
+      }"
+    >
       <div class="search-action-btns flex items-center mb-4">
-        <button
-          class="add-btn app-btn relative left-28"
-          @click="addNewForm"
-        >
-          New
+        <button class="add-btn app-btn relative left-28" @click="addNewForm">
+          New {{options.entity}}
         </button>
         <div class="search_form w-1/2 mx-auto my-3">
           <input type="text" class="form-control" placeholder="Search..." />
@@ -42,8 +45,7 @@
               dropdown-item
               cursor-pointer
               p-4
-              hover:bg-gray-800
-              hover:text-white
+              hover:bg-gray-800 hover:text-white
             "
             v-for="(listItem, index) in dropdownDetails"
             :key="index"
@@ -61,7 +63,7 @@
 
       <div class="list-items flex justify-evenly items-center font-extrabold">
         <span
-          class="name w-1/6"
+          class="entity w-1/6"
           v-for="(title, index) in listingTitles"
           :key="index"
           >{{ title }}</span
@@ -84,7 +86,7 @@
         :key="index"
       >
         <span
-          class="name w-1/6"
+          class="w-1/6"
           v-for="(entry, index2) in formatedTitles"
           :key="index2"
         >
@@ -110,22 +112,53 @@
           class="action-items flex justify-evenly items-center w-1/6"
           v-if="options.actions"
         >
-          <i class="add-item mx-2 cursor-pointer" @click="detailsForm">
+          <i class="add-item mx-2 cursor-pointer" @click="detailsForm(data)">
             <img src="@/assets/feather_icons/eye.svg" alt="" srcset="" />
           </i>
-          <i class="add-item mx-2" @click="editForm">
+          <i class="add-item mx-2" @click="editForm(data)">
             <img src="@/assets/feather_icons/edit.svg" alt="" srcset="" />
           </i>
-          <i class="add-item mx-2" @click="deleteForm">
+          <i class="add-item mx-2" @click="deleteForm(data)">
             <img src="@/assets/feather_icons/trash-2.svg" alt="" srcset="" />
           </i>
         </span>
       </div>
     </div>
-    <Add v-if="openAddForm" @closeForm="openAddForm = !openAddForm" :setup="{inputs:options.inputs,name:options.name}"/>
-    <Delete v-if="openDeleteForm" @closeForm="openDeleteForm = !openDeleteForm"/>
-    <Edit v-if="openEditForm" @closeForm="openEditForm = !openEditForm"/>
-    <Details v-if="openDetailsForm" @closeForm="openDetailsForm = !openDetailsForm"/>
+    <Add
+      v-if="openAddForm"
+      @closeForm="openAddForm = !openAddForm"
+      :setup="{
+        inputs: options.inputs,
+        entity: options.entity,
+        actions: options.actions,
+      }"
+    />
+    <Delete
+      v-if="openDeleteForm"
+      @closeForm="openDeleteForm = !openDeleteForm"
+      :setup="{
+        data: options.data,
+        actions: options.actions,
+      }"
+    />
+    <Edit
+      v-if="openEditForm"
+      @closeForm="openEditForm = !openEditForm"
+      :setup="{
+        inputs: options.inputs,
+        data: options.data,
+        actions: options.actions,
+      }"
+    />
+    <Details
+      v-if="openDetailsForm"
+      @closeForm="openDetailsForm = !openDetailsForm"
+      :setup="{
+        inputs: options.inputs,
+        data: options.data,
+        actions: options.actions,
+      }"
+    />
   </section>
 </template>
 
@@ -137,11 +170,11 @@ import Details from "./Details.vue";
 import Edit from "./Edit.vue";
 
 @Options({
-  components:{
+  components: {
     Add,
     Delete,
     Edit,
-    Details
+    Details,
   },
   props: {
     listingTitles: Array,
@@ -155,7 +188,7 @@ import Edit from "./Edit.vue";
       return this.listingTitles.map((title) => title.toLowerCase());
     },
     dropdownDetails() {
-      return this.$store.getters.getDropDowns
+      return this.$store.getters.getDropDowns;
     },
   },
   methods: {
@@ -164,18 +197,20 @@ import Edit from "./Edit.vue";
       this.$emit("fetchDropDownIcons");
     },
     addNewForm() {
-      // this.openAddForm = !this.openAddForm;
-        this.openAddForm = true;
+      this.openAddForm = true;
     },
-    deleteForm() {
+    deleteForm(data) {
+      this.options.data = { ...data, entity: this.options.entity };
       this.openDeleteForm = true;
     },
-    editForm(){
- this.openEditForm = true;
+    editForm(data) {
+      this.options.data = { ...data, entity: this.options.entity };
+      this.openEditForm = true;
     },
-     detailsForm(){
-       this.openDetailsForm = true;
-    }
+    detailsForm(data) {
+      this.options.data = { ...data, entity: this.options.entity };
+      this.openDetailsForm = true;
+    },
   },
   emits: ["toggleAddNewForm", "fetchDropDownIcons"],
 })
@@ -184,10 +219,10 @@ export default class Listing extends Vue {
     return {
       showMoreActions: false,
       searchQuery: "",
-      openAddForm:false,
-      openDeleteForm:false,
-      openEditForm:false,
-      openDetailsForm:false
+      openAddForm: false,
+      openDeleteForm: false,
+      openEditForm: false,
+      openDetailsForm: false,
     };
   }
 }

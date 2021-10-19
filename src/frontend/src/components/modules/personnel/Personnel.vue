@@ -2,7 +2,7 @@
   <Listing
     :listData="personnels"
     :listingTitles="titles"
-    :options="{ actions: true, inputs,name }"
+    :options="{ actions: true, inputs, name }"
     @fetchDropDownIcons="upDateActions"
   />
   <!-- event above @fetchDropDownIcons is used to mutate the state of the dropdown in each component -->
@@ -48,13 +48,37 @@ export default class Personnel extends Vue {
     return {
       titles: ["Name", "Role", "Status", "Group", "Created"],
       inputs: {
-        name: "text",
-        role: "select",
-        group: "select",
-        created: "date",
-        status: "checkbox",
+        // name: "text",
+        // role: "select",
+        // group: "select",
+        // group1: "select",
+        // group2: "select",
+        // group3: "select",
+        // group4: "textarea",
+        // group5: "textarea",
+        // group6: "textarea",
+        // created: "date",
+        // status: "checkbox",
+        // radio: "radio",
+        // button: "button",
+        // color: "color",
+        // "datetime-local": "datetime-local",
+        // email: "email",
+        // file: "file",
+        // image: "image",
+        password: "password",
+        range: "range",
+        // reset: "reset",
+        // search: "search",
+        // submit: "submit",
+        tel: "tel",
+        time: "time",
+        // url: "url",
+        // week: "week",
+        // month: "month",
+        // number: "number",
       },
-      name:"Personnel",
+      name: "Personnel",
       personnels: [
         {
           name: "Kambang Sinclaire",

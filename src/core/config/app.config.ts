@@ -1,5 +1,16 @@
 import { createConnection } from "typeorm";
-import { UserEntity } from "../database/entities/user.entity";
+import { GroupEntity } from "../database/models/entities/group.entity";
+import { InventoryEntity } from "../database/models/entities/inventory.entity";
+import { InvoiceEntity } from "../database/models/entities/invoice.entity";
+import { NotificationEntity } from "../database/models/entities/notification.entity";
+import { PermissionEntity } from "../database/models/entities/permissions.entity";
+import { PersonnelEntity } from "../database/models/entities/personnel.entity";
+import { ProductEntity } from "../database/models/entities/product.entity";
+import { RoleEntity } from "../database/models/entities/role.entity";
+import { SalesEntity } from "../database/models/entities/sales.entity";
+import { ServiceEntity } from "../database/models/entities/service.entity";
+import { StockEntity } from "../database/models/entities/stock.entity";
+import { UserEntity } from "../database/models/entities/user.entity";
 
 require('dotenv').config();
 const config = {
@@ -8,7 +19,7 @@ const config = {
             type: "sqlite",
             database: "kingscorp.db",
             synchronize:true,
-            entities:[UserEntity]
+            entities:[UserEntity,ProductEntity,GroupEntity,SalesEntity,PersonnelEntity,InvoiceEntity,InventoryEntity,RoleEntity,PermissionEntity,ServiceEntity,NotificationEntity,StockEntity,]
         });
     },
     apiKey: process.env.APP_KEY,

@@ -1,5 +1,7 @@
 import { BrowserWindow } from "electron";
 import { Connection, Repository } from "typeorm";
+import retrieveEntity from "../../utils/retrieve-entity.util";
+
 
 export default abstract class AbstractBaseManager {
     /**
@@ -29,4 +31,65 @@ export default abstract class AbstractBaseManager {
     */
     static actionEvent: string;
 
+
+    // add new resource
+    static async addResource(payload: any) {
+        let resource = AbstractBaseManager.entity;
+        AbstractBaseManager.repository = retrieveEntity(AbstractBaseManager.entity, AbstractBaseManager.dbConnection);
+        resource = { ...payload };
+        try {
+            const newResource = await AbstractBaseManager.repository.save(resource);
+            return newResource;
+        } catch (error: any) {
+            return error;
+        }
+    }
+
+    //get all resources
+    static async getAllResources() {
+        let repository = retrieveEntity(AbstractBaseManager.entity, AbstractBaseManager.dbConnection);
+        try {
+            const resources = await repository.find();
+            return resources;
+        } catch (error: any) {
+            return error;
+        }
+    }
+
+    // delete a resource
+    static async deleteResource(id: string | any) {
+        AbstractBaseManager.repository = retrieveEntity(AbstractBaseManager.entity, AbstractBaseManager.dbConnection);
+        try {
+            const deletedResource = await AbstractBaseManager.repository.delete({ id });
+            return deletedResource;
+        } catch (error: any) {
+            return error;
+        }
+    }
+
+    // edit a resource
+    static async updateResource(payload: any) {
+        AbstractBaseManager.repository = retrieveEntity(AbstractBaseManager.entity, AbstractBaseManager.dbConnection);
+        try {
+            const id = payload?.id;
+            const editedResource = await AbstractBaseManager.repository.update({ id }, payload.data);
+            return editedResource;
+        } catch (error: any) {
+            return error;
+        }
+    }
+    // get a single resource
+    static async getSingleResource(id: string | any) {
+        AbstractBaseManager.repository = retrieveEntity(AbstractBaseManager.entity, AbstractBaseManager.dbConnection);
+        try {
+            const singledresource = await AbstractBaseManager.repository.findOne({ ...id });
+            return singledresource;
+        } catch (error: any) {
+            return error;
+        }
+    }
+
+    static async queryResouces(query: Object | any) {
+
+    }
 }
