@@ -4,7 +4,7 @@ const ElectronUI = window.require("electron");
 //         on: (a: any, b: any) => {
 //             return a+b;
 //          },
-//         send: (a: any, b: any) => { 
+//         invoke: (a: any, b: any) => { 
 //             return a+b;
 //         }
 //     }

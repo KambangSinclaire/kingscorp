@@ -1,5 +1,5 @@
 <template>
-  <section
+  <!-- <section
     class="w-full bg-gray-200 font-extrabold max-h-screen overflow-hidden"
   >
     <div
@@ -63,36 +63,70 @@
         </form>
       </div>
     </div>
+  </section> -->
+
+  <section class="flex">
+    <div class="quick-actions grid grid-cols-3 mx-4 gap-4 w-4/6">
+      <InfoCard :setup="{ ...cardSetup }" />
+      <InfoCard :setup="{ ...cardSetup }" />
+      <InfoCard :setup="{ ...cardSetup }" />
+      <InfoCard :setup="{ ...cardSetup }" />
+      <InfoCard :setup="{ ...cardSetup }" />
+    </div>
+    <div class="quick-actions grid grid-cols-1 mx-4 gap-2 w-2/6">
+      <InfoCard :setup="{ ...cardSetup }" />
+      <InfoCard :setup="{ ...cardSetup }" />
+    </div>
   </section>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-
+import InfoCard from "./reusable/Info-Card.vue";
 @Options({
   props: {
     msg: String,
   },
+  components: {
+    InfoCard,
+  },
 })
 export default class Welcome extends Vue {
-  msg!: string;
+  data() {
+    return {
+      cardSetup: {
+        title: "Product",
+        range: 10,
+        btnMore: 78,
+        description: "Test Products",
+        topImage: "@/assets/feather_icons/user.svg",
+        actions: {
+          showMore: "show product listing",
+          showStatistics: "show product statistics",
+        },
+        routes: {
+          toListingView: "/products",
+          toStatisticsView: "/products/statistics",
+        },
+      },
+    };
+  }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+// h3 {
+//   margin: 40px 0 0;
+// }
+// ul {
+//   list-style-type: none;
+//   padding: 0;
+// }
+// li {
+//   display: inline-block;
+//   margin: 0 10px;
+// }
+// a {
+//   color: #42b983;
+// }
 </style>

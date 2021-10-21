@@ -63,7 +63,7 @@
 
       <div class="list-items flex justify-evenly items-center font-extrabold">
         <span
-          class="entity w-1/6"
+          class="entity w-1/6 text-center"
           v-for="(title, index) in listingTitles"
           :key="index"
           >{{ title }}</span
@@ -86,7 +86,7 @@
         :key="index"
       >
         <span
-          class="w-1/6"
+          class="w-1/6 text-center"
           v-for="(entry, index2) in formatedTitles"
           :key="index2"
         >

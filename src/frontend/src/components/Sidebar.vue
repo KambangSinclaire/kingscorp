@@ -1,5 +1,5 @@
 <template>
-  <section
+  <!-- <section
     class="sidebar w-full h-full bg-white bg-gradient-to-r app-custom-gradient"
   >
     <div class="side-links flex flex-col items-center justify-center">
@@ -89,6 +89,46 @@
           </span>
           <span class="nav-title">Logout</span>
         </router-link>
+      </div>
+    </div>
+  </section> -->
+
+  <section>
+    <div class="first-card px-8 py-4 rounded-sm border border-solid">
+      <div class="logo py-6">
+        <img src="@/assets/feather_icons/user.svg" alt="" />
+      </div>
+      <div class="app-description">
+        <p class="text py-6">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium
+          et debitis ipsum? Nesciunt recusandae quas
+        </p>
+        <button class="department-button">
+          <img src="@/assets/feather_icons/user.svg" alt="" />
+          Create Department
+        </button>
+      </div>
+      <div class="popular-links flex flex-col">
+        <span> Products </span>
+        <span> Stock </span>
+      </div>
+    </div>
+
+    <div class="second-card px-8 py-4 rounded-sm border border-solid my-8">
+      <h2>Quick</h2>
+      <div class="help-links flex flex-col">
+        <spa class="help-link-item py-4 flex">
+          <img src="@/assets/feather_icons/activity.svg" class="pr-4" alt="" />
+         Recent activity
+        </spa>
+         <spa class="help-link-item py-4 flex">
+          <img src="@/assets/feather_icons/archive.svg" class="pr-4" alt="" />
+         Archived resources
+        </spa>
+         <spa class="help-link-item py-4 flex">
+          <img src="@/assets/feather_icons/help-circle.svg" class="pr-4" alt="" />
+         Get Help
+        </spa>
       </div>
     </div>
   </section>

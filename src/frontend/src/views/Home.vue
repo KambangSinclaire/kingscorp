@@ -1,11 +1,9 @@
 <template>
- <div class="main-container flex w-full">
-  <!-- <div class="main-container flex max-w-max overflow-hidden"> THIS IS THE REAL AND BEST ACCEPTED DESIGN -->
+  <div class="flex w-full p-8 pt-4">
     <section class="sidebar w-1/6">
       <Sidebar />
     </section>
-    <section class="home w-5/6 bg-gray-200">
-      <!-- <Welcome :msg="message" /> -->
+    <section class="w-5/6">
       <router-view />
     </section>
   </div>

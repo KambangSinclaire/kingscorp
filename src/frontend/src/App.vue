@@ -1,5 +1,5 @@
 <template>
-  <div id="nav" class="bg-gradient-to-r from-gray-100 via-gray-200 to-gray-200">
+  <div id="nav" class="py-4">
     <Navbar />
   </div>
   <Home id="nav" />
@@ -41,7 +41,6 @@ export default class App extends Vue {}
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
