@@ -1,54 +1,59 @@
 <template>
   <Listing
+    :options="{ actions: true, inputs, entity, actions }"
     :listData="credits"
     :listingTitles="titles"
-    :options="{ actions: true }"
   />
 </template>
 
 <script>
 import { Options, Vue } from "vue-class-component";
+import { AppActionEvents } from "../../../events/app.events";
 import Listing from "../../reusable/Listing.vue";
 @Options({
+  computed: {
+    credits() {
+      const credits = this.$store.getters.getCredits;
+      return credits;
+    },
+  },
+  methods: {},
+
   components: {
     Listing,
   },
+
+  mounted() {
+    this.$store.dispatch(AppActionEvents.credit.retrieve);
+  },
 })
 export default class Credits extends Vue {
-
-     
   data() {
     return {
-      titles: ["Client", "Total Amount","Items", "Date", "Due date", "Note","Status"],
-      credits: [
-        {
-          client: "Kambang Sinclaire",
-          items:"papers, books",
-          'total amount': "15500",
-          date: "22-07-2021",
-          'due date': "28-07-2021",
-          status:"paid",
-          note: "took papers on credit",
-        },
-        {
-          client: "Kambang Epie",
-          items:"stapplers, pens",
-          'total amount': "10000",
-          date: "12-07-2021",
-          'due date': "22-07-2021",
-          status:"pending",
-          note: "took stapplers",
-        },
-        {
-          client: "Kambang Derick",
-          items:"catridges, rulers",
-          'total amount': "3000",
-          date: "01-07-2021",
-          'due date': "03-07-2021",
-          status:"cancelled",
-          note: "took catridges",
-        },
+      titles: [
+        "Name",
+        "Quantity",
+        "Unit Cost",
+        "Image Url",
+        "Description",
+        "Created",
       ],
+      inputs: {
+        name: "text",
+        quantity: "select",
+        created: "datetime",
+        description: "textarea",
+        "unit cost": "range",
+        "image url": "file",
+      },
+      entity: "credit",
+      actions: {
+        add: AppActionEvents.credit.add,
+        edit: AppActionEvents.credit.edit,
+        delete: AppActionEvents.credit.delete,
+        details: AppActionEvents.credit.retrieveSingle,
+        list: AppActionEvents.credit.retrieve,
+      },
     };
   }
 }

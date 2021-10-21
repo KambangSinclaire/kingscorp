@@ -1,6 +1,14 @@
 import { createStore } from "vuex";
-import IPC from "@/utils/ipc-renderer.util";
-import { AppActionEvents } from "@/events/app.events";
+import product from "./modules/product/product";
+import stock from "./modules/stock/stock";
+import sale from "./modules/sale/sale";
+import inventory from "./modules/inventory/inventory";
+import invoice from "./modules/invoice/invoice";
+import role from "./modules/role/role";
+import group from "./modules/group/group";
+import service from "./modules/services/service";
+import credit from "./modules/credit/credit";
+import personnel from "./modules/personnel/personnel";
 
 export default createStore({
   state: {
@@ -13,12 +21,7 @@ export default createStore({
       credits: false,
       invoices: false
     },
-    dropdownItems: [],
-    // REFERENCE FOR PRODUCTS IN STORE
-    products: <any>[],
-    // REFERENCE FOR PERSONNELS IN STORE
-    personnels: []
-
+    dropdownItems: <any>[],
   },
   getters: {
     getPreferences(state) {
@@ -27,11 +30,6 @@ export default createStore({
     getDropDowns(state) {
       return state.dropdownItems;
     },
-
-    // getters for products
-    getProducts(state) {
-      return state.products;
-    }
   },
   mutations: {
     setDropdownActions(state, payload) {
@@ -41,15 +39,7 @@ export default createStore({
     setupPreferences(state, payload) {
       return state.preferences = { ...state.preferences, ...payload };
     },
-    setProduct(state, payload) {
-      return state.products.push(payload);
-    },
-    setProducts(state, payload) {
-      return state.products = [...payload];
-    },
-    deleteProduct(state, payload) {
-      return state.products.filter((data: any) => data.id !== payload.id);
-    },
+
   },
   actions: {
     updatePreferences(ctx, payload) {
@@ -58,31 +48,6 @@ export default createStore({
     upDropdownActions(ctx, payload) {
       ctx.commit('setDropdownActions', payload);
     },
-    addProduct(ctx, payload) {
-      IPC.ipcRequestTrigger(AppActionEvents.product.add, payload).then((data) => {
-        ctx.commit('setProduct', data);
-      });
-    },
-    getProducts(ctx) {
-      IPC.ipcRequestTrigger(AppActionEvents.product.retrieve).then((data) => {
-        ctx.commit('setProducts', data);
-      });
-    },
-    editProduct(ctx,payload) {
-      IPC.ipcRequestTrigger(AppActionEvents.product.edit,payload).then((data) => {
-        ctx.commit('setProduct', data);
-      });
-    },
-    deleteProduct(ctx,payload) {
-      IPC.ipcRequestTrigger(AppActionEvents.product.delete,payload).then((data) => {
-        ctx.commit('deleteProduct', data);
-      });
-    },
-    getSingleProduct(ctx,payload) {
-      IPC.ipcRequestTrigger(AppActionEvents.product.retrieveSingle,payload).then((data) => {
-        ctx.commit('setProduct', data);
-      });
-    }
   },
-  modules: {},
+  modules: { product, stock, sale, personnel, invoice, inventory, service, role, group, credit },
 });
