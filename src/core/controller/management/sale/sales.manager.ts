@@ -6,27 +6,27 @@
  export class SalesManager extends AbstractBaseManager {
  
      // add new Sales
-     async addSales(event: Event, payload: any) {
+     async addSale(payload: any) {
          return SalesManager.addResource(payload)
      }
  
      //get all Saless
-     async getAllSales() {
+     async getSales(payload: any) {
          return SalesManager.getAllResources();
      }
  
      // delete a Sales
-     async deleteSales(event: Event, id: string | any) {
+     async deleteSale(id: string | any) {
          return SalesManager.deleteResource(id)
      }
  
      // edit a Sales
-     async editSales(event: Event, payload: any) {
+     async editSale(payload: any) {
          return SalesManager.updateResource(payload)
      }
  
      // get a single Sales
-     async singleSale(event: Event, id: any) {
+     async getSingleSale(id: any) {
          return SalesManager.getSingleResource(id);
      }
  }

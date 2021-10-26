@@ -1,6 +1,6 @@
 <template>
   <Listing
-    :options="{ actions: true, inputs, entity, actions }"
+    :options="{ actionBtns: true, inputs, entity, actions }"
     :listData="credits"
     :listingTitles="titles"
   />
@@ -8,8 +8,8 @@
 
 <script>
 import { Options, Vue } from "vue-class-component";
-import { AppActionEvents } from "../../../events/app.events";
 import Listing from "../../reusable/Listing.vue";
+import { AppActionEvents } from "../../../events/app.events";
 @Options({
   computed: {
     credits() {
@@ -31,22 +31,22 @@ export default class Credits extends Vue {
   data() {
     return {
       titles: [
-        "Name",
-        "Quantity",
-        "Unit Cost",
-        "Image Url",
+        "Amount",
+        "Items",
+        "Expiry Date",
+        "User",
         "Description",
-        "Created",
+        "Client",
       ],
       inputs: {
-        name: "text",
-        quantity: "select",
-        created: "datetime",
+        amount: "number",
+        items: "select",
+        client: "text",
         description: "textarea",
-        "unit cost": "range",
-        "image url": "file",
+        "expiry date": "date",
+        "user": "text",
       },
-      entity: "credit",
+      entity: "Credit",
       actions: {
         add: AppActionEvents.credit.add,
         edit: AppActionEvents.credit.edit,

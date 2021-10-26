@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class UserEntity {
@@ -10,13 +10,13 @@ export class UserEntity {
     signInType?: string;
 
     @Column()
-    lastLogin?: Date;
+    'last login'?: Date;
 
     @Column()
-    lastLoginIp?: string;
+    'last Login Ip'?: string;
 
     @Column()
-    lastLoginLocation?: string;
+    'last login location'?: string;
 
     @Column()
     username?: string;
@@ -29,12 +29,6 @@ export class UserEntity {
 
     @Column()
     about?: string;
-
-    // @Column()
-    // createdAt?: string;
-
-    // @Column()
-    // updateAt?: string;
 
     @Column()
     createdBy?: string;
@@ -51,4 +45,9 @@ export class UserEntity {
     @Column()
     password?:string;
 
+    @CreateDateColumn({type:String,default:`${new Date()}`})
+    'created at'?: string;
+
+    @UpdateDateColumn({type:String,default:`${new Date()}`})
+   'updated at'?: string;
 }

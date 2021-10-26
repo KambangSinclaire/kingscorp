@@ -6,27 +6,27 @@
  export class CreditManager extends AbstractBaseManager {
  
      // add new Credit
-     async addCredit(event: Event, payload: any) {
+     async addCredit(payload: any) {
          return CreditManager.addResource(payload)
      }
  
      //get all Credits
-     async getAllCredits() {
+     async getCredits(payload: any) {
          return CreditManager.getAllResources();
      }
  
      // delete a Credit
-     async deleteCredit(event: Event, id: string | any) {
+     async deleteCredit(id: string | any) {
          return CreditManager.deleteResource(id)
      }
  
      // edit a Credit
-     async editCredit(event: Event, payload: any) {
+     async editCredit(payload: any) {
          return CreditManager.updateResource(payload)
      }
  
      // get a single Credit
-     async singleCredit(event: Event, id: any) {
+     async getSingleCredit(id: any) {
          return CreditManager.getSingleResource(id);
      }
  }

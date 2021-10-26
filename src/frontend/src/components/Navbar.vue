@@ -43,25 +43,45 @@
       <div class="w-1/3">
         <nav class="container">
           <ul class="nav-links flex justify-start">
-            <li class="link-items px-4">Home</li>
-            <li class="link-items px-4">Recent</li>
-            <li class="link-items px-4">Statistics</li>
-            <li class="link-items px-4">Explore</li>
+            <router-link to="/">
+              <li class="link-items px-4">Home</li>
+            </router-link>
+            <router-link to="/recent-activity">
+              <li class="link-items px-4">Recent</li>
+            </router-link>
+            <router-link to="/statistics">
+              <li class="link-items px-4">Statistics</li>
+            </router-link>
+            <router-link to="/explore/dashboard">
+              <li class="link-items px-4">Explore</li>
+            </router-link>
           </ul>
         </nav>
       </div>
       <div class="w-1/3">
         <div class="search-section container flex">
-          <img src="@/assets/feather_icons/search.svg" alt=""/>
-          <input type="search" placeholder="Search Nolicorp" class="outline-none"/>
+           <i class="fas fa-search"></i>
+          <input
+            type="search"
+            placeholder="Search KingsCorp"
+            class="outline-none text-center"
+          />
         </div>
       </div>
       <div class="w-1/3">
         <div class="settings container flex justify-end">
-          <img src="@/assets/feather_icons/moon.svg" alt="" class="px-8" />
-          <img src="@/assets/feather_icons/user.svg" alt="" class="px-8" />
-          <img src="@/assets/feather_icons/bell.svg" alt="" class="px-8" />
-          <img src="@/assets/feather_icons/settings.svg" alt="" class="px-8" />
+          <router-link to="/" class="px-8">
+            <i class="far fa-moon"></i>
+          </router-link>
+          <router-link to="/notification" class="px-8">
+            <i class="far fa-bell"></i>
+          </router-link>
+          <router-link to="/profile" class="px-8">
+            <i class="fas fa-user-circle"></i>
+          </router-link>
+          <router-link to="/settings" class="px-8">
+            <i class="fas fa-cog"></i>
+          </router-link>
         </div>
       </div>
     </nav>

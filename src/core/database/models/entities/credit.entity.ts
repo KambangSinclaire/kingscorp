@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class CreditEntity {
@@ -7,20 +7,26 @@ export class CreditEntity {
     id?: string;
 
     @Column()
-    name?: string;
+    amount?: number;
 
     @Column()
-    quantity?: number;
+    'expiry Date'?: string;
 
     @Column()
-    'unit cost'?: number;
+    client?: string;
 
-    @Column()
-    created!: Date
-
-    @Column()
-    'image url'?: string;
-
-    @Column()
+    @Column({type:String,default:""})
     description?: string;
+
+    @Column()
+    items?: string;
+
+    @Column({type:String,default:"Admin"})
+    user?:string
+
+    @CreateDateColumn({type:String,default:`${new Date()}`})
+    'created at'?: string;
+
+    @UpdateDateColumn({type:String,default:`${new Date()}`})
+   'updated at'?: string;
 }

@@ -77,7 +77,12 @@ export const AppActionEvents = {
     notification: {
         sendSMS: "sendSmsNotification",
         sendEmail: "sendEmailNotification",
-        sendPush: "sendPushNotification"
+        sendPush: "sendPushNotification",
+        add: "addNotification",
+        edit: "editNotification",
+        retrieve: "getNotifications",
+        retrieveSingle: "getSingleNotification",
+        delete: "deleteNotification",
     },
     preference:{
         add: "addPreference",

@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class StockEntity {
@@ -10,17 +10,32 @@ export class StockEntity {
     name?: string;
 
     @Column()
-    quantity?: number;
+    'estimated budget'?: number;
 
     @Column()
-    'unit cost'?: number;
+    'actual budget'?: number;
 
     @Column()
-    created!: Date
+    'estimated profit'?: number;
+
+    @Column({type:Number,default:0})
+    'actual profit'?: number;
 
     @Column()
-    'image url'?: string;
+    status?: string;
 
     @Column()
+    products?: string
+
+    @Column()
+    user?: string;
+
+    @Column({type:String,default:``})
     description?: string;
+
+    @CreateDateColumn({type:String,default:`${new Date()}`})
+    'created at'?: string;
+
+    @UpdateDateColumn({type:String,default:`${new Date()}`})
+   'updated at'?: string;
 }

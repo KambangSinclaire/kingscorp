@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class ServiceEntity {
@@ -10,17 +10,17 @@ export class ServiceEntity {
     name?: string;
 
     @Column()
-    quantity?: number;
+    category?: string;
 
     @Column()
-    'unit cost'?: number;
+    'cost per hour'?: number;
 
-    @Column()
-    created!: Date
-
-    @Column()
-    'image url'?: string;
-
-    @Column()
+    @Column({type:String,default:``})
     description?: string;
+
+    @CreateDateColumn({type:String,default:`${new Date()}`})
+    'created at'?: string;
+
+    @UpdateDateColumn({type:String,default:`${new Date()}`})
+   'updated at'?: string;
 }

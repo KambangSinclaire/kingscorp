@@ -1,6 +1,6 @@
 <template>
   <Listing
-    :options="{ actions: true, inputs, entity, actions }"
+    :options="{ actionBtns: true, inputs, entity, actions }"
     :listData="products"
     :listingTitles="titles"
   />
@@ -36,15 +36,19 @@ export default class Product extends Vue {
         "Unit Cost",
         "Image Url",
         "Description",
-        "Created",
+        "Inventory",
+        "Stock",
+        "Category",
       ],
       inputs: {
         name: "text",
         quantity: "number",
-        created: "datetime-local",
+        stock: "text",
         description: "textarea",
         "unit cost": "number",
         "image url": "file",
+        inventory: "text",
+        category: "text",
       },
       entity: "Product",
       actions: {

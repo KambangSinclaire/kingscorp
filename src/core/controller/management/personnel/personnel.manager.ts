@@ -6,27 +6,27 @@
  export class PersonnelManager extends AbstractBaseManager {
  
      // add new Personnel
-     async addPersonnel(event: Event, payload: any) {
+     async addPersonnel(payload: any) {
          return PersonnelManager.addResource(payload)
      }
  
      //get all Personnels
-     async getAllPersonnels() {
+     async getPersonnels(payload: any) {
          return PersonnelManager.getAllResources();
      }
  
      // delete a Personnel
-     async deletePersonnel(event: Event, id: string | any) {
+     async deletePersonnel(id: string | any) {
          return PersonnelManager.deleteResource(id)
      }
  
      // edit a Personnel
-     async editPersonnel(event: Event, payload: any) {
+     async editPersonnel(payload: any) {
          return PersonnelManager.updateResource(payload)
      }
  
      // get a single Personnel
-     async singlePersonnel(event: Event, id: any) {
+     async getSinglePersonnel(id: any) {
          return PersonnelManager.getSingleResource(id);
      }
  }

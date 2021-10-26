@@ -32,160 +32,204 @@ import AbstractBaseManager from "../controller/management/AbstractBaseManager";
 const ipcIncommingMessageHandler = (dbConnection: Connection, actionWindow: BrowserWindow) => {
 
     // CHANNEL HANDLER
-    const channelHandler = (channel: string, handler: any) => {
-        ipcMain.handle(channel, handler)
+    const channelHandler = (channel: string) => {
+        ipcMain.handle(channel, async (event, payload) => {
+            let res = await router(channel, payload, dbConnection, actionWindow);
+            console.log("here is the response sent ", res);
+            return res;
+        })
     }
 
-    /**
-     * Handle User related events
-     */
-    const userManager = new UserManager();
-    AbstractBaseManager.entity = UserEntity;
-    AbstractBaseManager.dbConnection = dbConnection;
-    AbstractBaseManager.window = actionWindow;
-    AbstractBaseManager.actionEvent = AppActionEvents.user.login;
-    channelHandler(AppActionEvents.user.login, userManager.addUser);
+    channelHandler(AppActionEvents.user.login);
+    channelHandler(AppActionEvents.product.add);
+    channelHandler(AppActionEvents.product.retrieve);
+    channelHandler(AppActionEvents.product.retrieveSingle);
+    channelHandler(AppActionEvents.product.edit);
+    channelHandler(AppActionEvents.product.delete);
 
+    channelHandler(AppActionEvents.stock.add);
+    channelHandler(AppActionEvents.stock.retrieve);
+    channelHandler(AppActionEvents.stock.retrieveSingle);
+    channelHandler(AppActionEvents.stock.edit);
+    channelHandler(AppActionEvents.stock.delete);
 
-    /**
-     * Handle Product related events
-     */
-    const productManager = new ProductManager();
-    AbstractBaseManager.entity = ProductEntity;
-    AbstractBaseManager.dbConnection = dbConnection;
-    AbstractBaseManager.window = actionWindow;
-    channelHandler(AppActionEvents.product.add, productManager.addProduct);
-    channelHandler(AppActionEvents.product.retrieve, productManager.getAllProducts);
-    channelHandler(AppActionEvents.product.retrieveSingle, productManager.singleProduct);
-    channelHandler(AppActionEvents.product.edit, productManager.editProduct);
-    channelHandler(AppActionEvents.product.delete, productManager.deleteProduct);
+    channelHandler(AppActionEvents.credit.add);
+    channelHandler(AppActionEvents.credit.retrieve);
+    channelHandler(AppActionEvents.credit.retrieveSingle);
+    channelHandler(AppActionEvents.credit.edit);
+    channelHandler(AppActionEvents.credit.delete);
 
-    /**
-    * Handle stock related events
-    */
-    const stockManager = new StockManager();
-    AbstractBaseManager.entity = StockEntity;
-    AbstractBaseManager.dbConnection = dbConnection;
-    AbstractBaseManager.window = actionWindow;
-    channelHandler(AppActionEvents.stock.add, stockManager.addStock);
-    channelHandler(AppActionEvents.stock.retrieve, stockManager.getAllStocks);
-    channelHandler(AppActionEvents.stock.retrieveSingle, stockManager.singleStock);
-    channelHandler(AppActionEvents.stock.edit, stockManager.editStock);
-    channelHandler(AppActionEvents.stock.delete, stockManager.deleteStock);
+    channelHandler(AppActionEvents.personnel.add);
+    channelHandler(AppActionEvents.personnel.retrieve);
+    channelHandler(AppActionEvents.personnel.retrieveSingle);
+    channelHandler(AppActionEvents.personnel.edit);
+    channelHandler(AppActionEvents.personnel.delete);
 
+    channelHandler(AppActionEvents.inventory.add);
+    channelHandler(AppActionEvents.inventory.retrieve);
+    channelHandler(AppActionEvents.inventory.retrieveSingle);
+    channelHandler(AppActionEvents.inventory.edit);
+    channelHandler(AppActionEvents.inventory.delete);
 
-    /**
-    * Handle Credit related events
-    */
-    const creditManager = new CreditManager();
-    AbstractBaseManager.entity = CreditEntity;
-    AbstractBaseManager.dbConnection = dbConnection;
-    AbstractBaseManager.window = actionWindow;
-    channelHandler(AppActionEvents.credit.add, creditManager.addCredit);
-    channelHandler(AppActionEvents.credit.retrieve, creditManager.getAllCredits);
-    channelHandler(AppActionEvents.credit.retrieveSingle, creditManager.singleCredit);
-    channelHandler(AppActionEvents.credit.edit, creditManager.editCredit);
-    channelHandler(AppActionEvents.credit.delete, creditManager.deleteCredit);
+    channelHandler(AppActionEvents.invoice.add);
+    channelHandler(AppActionEvents.invoice.retrieve);
+    channelHandler(AppActionEvents.invoice.retrieveSingle);
+    channelHandler(AppActionEvents.invoice.edit);
+    channelHandler(AppActionEvents.invoice.delete);
 
-    /**
-    * Handle personnel related events
-    */
-    const personnelManager = new PersonnelManager();
-    AbstractBaseManager.entity = PersonnelEntity;
-    AbstractBaseManager.dbConnection = dbConnection;
-    AbstractBaseManager.window = actionWindow;
-    channelHandler(AppActionEvents.personnel.add, personnelManager.addPersonnel);
-    channelHandler(AppActionEvents.personnel.retrieve, personnelManager.getAllPersonnels);
-    channelHandler(AppActionEvents.personnel.retrieveSingle, personnelManager.singlePersonnel);
-    channelHandler(AppActionEvents.personnel.edit, personnelManager.editPersonnel);
-    channelHandler(AppActionEvents.personnel.delete, personnelManager.deletePersonnel);
+    channelHandler(AppActionEvents.role.add);
+    channelHandler(AppActionEvents.role.retrieve);
+    channelHandler(AppActionEvents.role.retrieveSingle);
+    channelHandler(AppActionEvents.role.edit);
+    channelHandler(AppActionEvents.role.delete);
 
+    channelHandler(AppActionEvents.sale.add);
+    channelHandler(AppActionEvents.sale.retrieve);
+    channelHandler(AppActionEvents.sale.retrieveSingle);
+    channelHandler(AppActionEvents.sale.edit);
+    channelHandler(AppActionEvents.sale.delete);
 
-    /**
-    * Handle Inventory related events
-    */
-    const inventoryManager = new InventoryManager();
-    AbstractBaseManager.entity = InventoryEntity;
-    AbstractBaseManager.dbConnection = dbConnection;
-    AbstractBaseManager.window = actionWindow;
-    channelHandler(AppActionEvents.inventory.add, inventoryManager.addInventory);
-    channelHandler(AppActionEvents.inventory.retrieve, inventoryManager.getAllInventorys);
-    channelHandler(AppActionEvents.inventory.retrieveSingle, inventoryManager.singleInventory);
-    channelHandler(AppActionEvents.inventory.edit, inventoryManager.editInventory);
-    channelHandler(AppActionEvents.inventory.delete, inventoryManager.deleteInventory);
+    channelHandler(AppActionEvents.service.add);
+    channelHandler(AppActionEvents.service.retrieve);
+    channelHandler(AppActionEvents.service.retrieveSingle);
+    channelHandler(AppActionEvents.service.edit);
+    channelHandler(AppActionEvents.service.delete);
 
-    /**
-    * Handle Invoice related events
-    */
-    const invoiceManager = new InvoiceManager();
-    AbstractBaseManager.entity = InvoiceEntity;
-    AbstractBaseManager.dbConnection = dbConnection;
-    AbstractBaseManager.window = actionWindow;
-    channelHandler(AppActionEvents.invoice.add, invoiceManager.addInvoice);
-    channelHandler(AppActionEvents.invoice.retrieve, invoiceManager.getAllInvoices);
-    channelHandler(AppActionEvents.invoice.retrieveSingle, invoiceManager.singleInvoice);
-    channelHandler(AppActionEvents.invoice.edit, invoiceManager.editInvoice);
-    channelHandler(AppActionEvents.invoice.delete, invoiceManager.deleteInvoice);
-
-    /**
-    * Handle Role related events
-    */
-    const roleManager = new RoleManager();
-    AbstractBaseManager.entity = RoleEntity;
-    AbstractBaseManager.dbConnection = dbConnection;
-    AbstractBaseManager.window = actionWindow;
-    channelHandler(AppActionEvents.role.add, roleManager.addRole);
-    channelHandler(AppActionEvents.role.retrieve, roleManager.getAllRoles);
-    channelHandler(AppActionEvents.role.retrieveSingle, roleManager.singleRole);
-    channelHandler(AppActionEvents.role.edit, roleManager.editRole);
-    channelHandler(AppActionEvents.role.delete, roleManager.deleteRole);
-
-    /**
-    * Handle Sale related events
-    */
-    const saleManager = new SalesManager();
-    AbstractBaseManager.entity = SalesEntity;
-    AbstractBaseManager.dbConnection = dbConnection;
-    AbstractBaseManager.window = actionWindow;
-    channelHandler(AppActionEvents.sale.add, saleManager.addSales);
-    channelHandler(AppActionEvents.sale.retrieve, saleManager.getAllSales);
-    channelHandler(AppActionEvents.sale.retrieveSingle, saleManager.singleSale);
-    channelHandler(AppActionEvents.sale.edit, saleManager.editSales);
-    channelHandler(AppActionEvents.sale.delete, saleManager.deleteSales);
-
-    /**
-    * Handle Service related events
-    */
-    const serviceManager = new ServiceManager();
-    AbstractBaseManager.entity = ServiceEntity;
-    AbstractBaseManager.dbConnection = dbConnection;
-    AbstractBaseManager.window = actionWindow;
-    channelHandler(AppActionEvents.service.add, serviceManager.addService);
-    channelHandler(AppActionEvents.service.retrieve, serviceManager.getAllServices);
-    channelHandler(AppActionEvents.service.retrieveSingle, serviceManager.singleService);
-    channelHandler(AppActionEvents.service.edit, serviceManager.editService);
-    channelHandler(AppActionEvents.service.delete, serviceManager.deleteService);
-
-    /**
-    * Handle Group related events
-    */
-    const groupManager = new GroupManager();
-    AbstractBaseManager.entity = GroupEntity;
-    AbstractBaseManager.dbConnection = dbConnection;
-    AbstractBaseManager.window = actionWindow;
-    channelHandler(AppActionEvents.group.add, groupManager.addGroup);
-    channelHandler(AppActionEvents.group.retrieve, groupManager.getAllGroups);
-    channelHandler(AppActionEvents.group.retrieveSingle, groupManager.singleGroup);
-    channelHandler(AppActionEvents.group.edit, groupManager.editGroup);
-    channelHandler(AppActionEvents.group.delete, groupManager.deleteGroup);
-
+    channelHandler(AppActionEvents.group.add);
+    channelHandler(AppActionEvents.group.retrieve);
+    channelHandler(AppActionEvents.group.retrieveSingle);
+    channelHandler(AppActionEvents.group.edit);
+    channelHandler(AppActionEvents.group.delete);
 
 }
 
 
+async function router(channel: string, payload: any, dbConnection: Connection, actionWindow: BrowserWindow) {
 
+    console.log('here is the channel sent ', channel);
 
+    /**
+    * Handle User related events
+    */
+    if (channel.includes('User')) {
+        const userManager = new UserManager() as any;
+        AbstractBaseManager.entity = UserEntity;
+        AbstractBaseManager.dbConnection = dbConnection;
+        AbstractBaseManager.window = actionWindow;
+        AbstractBaseManager.actionEvent = AppActionEvents.user.login;
+        userManager[channel](payload);
+    }
 
+    /**
+     * Handle Product related events
+     */
+    if (channel.includes('Product')) {
+        const productManager = new ProductManager() as any;
+        AbstractBaseManager.entity = ProductEntity;
+        AbstractBaseManager.dbConnection = dbConnection;
+        AbstractBaseManager.window = actionWindow;
+        return await productManager[channel](payload)
+    }
 
+    /**
+    * Handle stock related events
+    */
+    if (channel.includes('Stock')) {
+        const stockManager = new StockManager() as any;
+        AbstractBaseManager.entity = StockEntity;
+        AbstractBaseManager.dbConnection = dbConnection;
+        AbstractBaseManager.window = actionWindow;
+        return await stockManager[channel](payload);
+    }
+
+    /**
+    * Handle Credit related events
+    */
+    if (channel.includes('Credit')) {
+        const creditManager = new CreditManager() as any;
+        AbstractBaseManager.entity = CreditEntity;
+        AbstractBaseManager.dbConnection = dbConnection;
+        AbstractBaseManager.window = actionWindow;
+        return await creditManager[channel](payload);
+    }
+
+    /**
+    * Handle personnel related events
+    */
+    if (channel.includes('Personnel')) {
+        const personnelManager = new PersonnelManager() as any;
+        AbstractBaseManager.entity = PersonnelEntity;
+        AbstractBaseManager.dbConnection = dbConnection;
+        AbstractBaseManager.window = actionWindow;
+        return await personnelManager[channel](payload);
+    }
+
+    /**
+    * Handle Inventory related events
+    */
+    if (channel.includes('Inventory')) {
+        const inventoryManager = new InventoryManager() as any;
+        AbstractBaseManager.entity = InventoryEntity;
+        AbstractBaseManager.dbConnection = dbConnection;
+        AbstractBaseManager.window = actionWindow;
+        return await inventoryManager[channel](payload);
+    }
+
+    /**
+    * Handle Invoice related events
+    */
+    if (channel.includes('Invoice')) {
+        const invoiceManager = new InvoiceManager() as any;
+        AbstractBaseManager.entity = InvoiceEntity;
+        AbstractBaseManager.dbConnection = dbConnection;
+        AbstractBaseManager.window = actionWindow;
+        return await invoiceManager[channel](payload);
+    }
+
+    /**
+    * Handle Role related events
+    */
+    if (channel.includes('Role')) {
+        const roleManager = new RoleManager() as any;
+        AbstractBaseManager.entity = RoleEntity;
+        AbstractBaseManager.dbConnection = dbConnection;
+        AbstractBaseManager.window = actionWindow;
+        return await roleManager[channel](payload)
+    }
+
+    /**
+    * Handle Sale related events
+    */
+    if (channel.includes('Sale')) {
+        const saleManager = new SalesManager() as any;
+        AbstractBaseManager.entity = SalesEntity;
+        AbstractBaseManager.dbConnection = dbConnection;
+        AbstractBaseManager.window = actionWindow;
+        return await saleManager[channel](payload);
+    }
+
+    /**
+    * Handle Service related events
+    */
+    if (channel.includes('Service')) {
+        const serviceManager = new ServiceManager() as any;
+        AbstractBaseManager.entity = ServiceEntity;
+        AbstractBaseManager.dbConnection = dbConnection;
+        AbstractBaseManager.window = actionWindow;
+        return await serviceManager[channel](payload);
+    }
+
+    /**
+    * Handle Group related events
+    */
+    if (channel.includes('Group')) {
+        const groupManager = new GroupManager() as any;
+        AbstractBaseManager.entity = GroupEntity;
+        AbstractBaseManager.dbConnection = dbConnection;
+        AbstractBaseManager.window = actionWindow;
+        return await groupManager[channel](payload);
+    }
+
+}
 
 export default ipcIncommingMessageHandler;

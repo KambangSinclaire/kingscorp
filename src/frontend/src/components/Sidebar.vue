@@ -93,8 +93,8 @@
     </div>
   </section> -->
 
-  <section>
-    <div class="first-card px-8 py-4 rounded-sm border border-solid">
+  <section class="container">
+    <div class="first-card container px-8 py-4 rounded-sm border border-solid">
       <div class="logo py-6">
         <img src="@/assets/feather_icons/user.svg" alt="" />
       </div>
@@ -114,7 +114,7 @@
       </div>
     </div>
 
-    <div class="second-card px-8 py-4 rounded-sm border border-solid my-8">
+    <div class="second-card container px-8 py-4 rounded-sm border border-solid my-8">
       <h2>Quick</h2>
       <div class="help-links flex flex-col">
         <spa class="help-link-item py-4 flex">

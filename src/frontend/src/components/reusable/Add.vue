@@ -1,17 +1,15 @@
 <template>
-  <div class="w-full relative transform -translate-y-full">
+  <div class="container w-full fixed top-24 -right-4 overflow-scroll">
     <form
       action=""
-      class="form-container fixed alert-modal bg-white shadow-lg w-3/4 p-8"
+      class="form-container bg-gray-100 shadow-lg w-2/4 p-8"
     >
       <div class="flex justify-between items-center">
         <h1 class="medium-center-header py-4 font-extrabold">
           Add new {{ setup?.entity }}
         </h1>
-        <span class="absolute top-4 right-8 cursor-pointer" @click="closeForm">
-          <i class="">
-            <img src="@/assets/feather_icons/x-circle.svg" alt="" srcset="" />
-          </i>
+        <span class="relative -top-8 left-60 cursor-pointer text-red-400" @click="closeForm">
+          <i class="far fa-window-close fa-2x"></i>
         </span>
       </div>
 

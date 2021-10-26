@@ -1,55 +1,64 @@
 <template>
   <Listing
     :listData="stock"
+    :options="{ actionBtns: true, inputs, entity, actions }"
     :listingTitles="titles"
-    :options="{ actions: true }"
   />
 </template>
 
 <script>
 import { Options, Vue } from "vue-class-component";
+import { AppActionEvents } from "../../../events/app.events";
 import Listing from "../../reusable/Listing.vue";
+
 @Options({
+  computed: {
+    stock() {
+      const stocks = this.$store.getters.getStocks;
+      return stocks;
+    },
+  },
+  methods: {},
+
   components: {
     Listing,
+  },
+
+  mounted() {
+    this.$store.dispatch(AppActionEvents.stock.retrieve);
   },
 })
 export default class Stock extends Vue {
   data() {
     return {
-      titles: ["Supplier", "Initiator","Budget","Top Items", "Date", "Estimated date", "Description","Status"],
-      stock: [
-        {
-          supplier: "Kambang Calis",
-          'top items':"papers, books",
-          budget: "156500",
-          date: "22-07-2021",
-          'estimated date': "28-07-2021",
-          initiator:"kingscorp",
-          status:"received",
-          description: "latest intake of papers",
-        },
-        {
-          supplier: "Kambang Divine",
-          'top items':"stapplers, pens",
-          budget: "98000",
-          date: "12-07-2021",
-          'estimated date': "22-07-2021",
-          initiator:"kingscorp",
-          status:"waiting",
-          description: "latest intake of stapplers",
-        },
-        {
-          supplier: "Kambang Kirian",
-          'top items':"catridges, rulers",
-          budget: "86000",
-          date: "01-07-2021",
-          'estimated date': "03-07-2021",
-          initiator:"kingscorp",
-          status:"cancelled",
-          description: "latest intake of catridges",
-        },
+      titles: [
+        "Estimated budget",
+        "Products",
+        "Actual budget",
+        "Estimated profit",
+        "User",
+        "Description",
+        "Status",
+        "Name",
       ],
+      inputs: {
+        "estimated budget": "number",
+        products: "select",
+        status: "text",
+        "estimated profit":'number',
+        description: "textarea",
+        "actual budget": "number",
+        user: "text",
+        name: "text",
+      },
+      entity: "Stock",
+      actions: {
+        add: AppActionEvents.stock.add,
+        edit: AppActionEvents.stock.edit,
+        delete: AppActionEvents.stock.delete,
+        details: AppActionEvents.stock.retrieveSingle,
+        list: AppActionEvents.stock.retrieve,
+      },
     };
   }
 }

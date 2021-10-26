@@ -1,52 +1,63 @@
 <template>
   <Listing
     :listData="sales"
+    :options="{ actionBtns: true, inputs, entity, actions }"
     :listingTitles="titles"
-    :options="{ actions: true }"
   />
 </template>
 
 <script>
 import { Options, Vue } from "vue-class-component";
 import Listing from "../../reusable/Listing.vue";
+import { AppActionEvents } from "../../../events/app.events";
 @Options({
+  computed: {
+    sales() {
+      const sales = this.$store.getters.getSales;
+      return sales;
+    },
+  },
+  methods: {},
+
   components: {
     Listing,
+  },
+
+  mounted() {
+    this.$store.dispatch(AppActionEvents.sale.retrieve);
   },
 })
 export default class Sales extends Vue {
   data() {
     return {
-      titles: ["Initiator","Amount","Top Items", "Date", "Client", "Description","Status"],
-      sales: [
-        {
-          'top items':"papers, books",
-          amount: "156500",
-          date: "22-07-2021",
-          'client': "Kambang Sinclaire",
-          initiator:"Kingscorp",
-          status:"success",
-          description: "bought papers",
-        },
-        {
-          'top items':"stapplers, pens",
-          amount: "98000",
-          date: "12-07-2021",
-          'client': "Kambang Derick",
-          initiator:"kingscorp",
-          status:"pending",
-          description: "bought stapplers",
-        },
-        {
-          'top items':"catridges, rulers",
-          amount: "86000",
-          date: "01-07-2021",
-          'client': "Kambang Epie",
-          initiator:"kingscorp",
-          status:"cancelled",
-          description: "bought catridges",
-        },
+      titles: [
+        "Name",
+        "Items",
+        "User",
+        "Description",
+        "Amount",
+        "Received",
+        "Balance",
+        "Status"
       ],
+      inputs: {
+        name: "text",
+        items: "text",
+        description: "textarea",
+        user: "text",
+        amount:"number",
+        received:"number",
+        balance:"number",
+        status:"text"
+      },
+      entity: "Sale",
+      actions: {
+        add: AppActionEvents.sale.add,
+        edit: AppActionEvents.sale.edit,
+        delete: AppActionEvents.sale.delete,
+        details: AppActionEvents.sale.retrieveSingle,
+        list: AppActionEvents.sale.retrieve,
+      },
     };
   }
 }

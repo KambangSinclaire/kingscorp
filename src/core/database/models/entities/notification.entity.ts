@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class NotificationEntity {
@@ -7,20 +7,23 @@ export class NotificationEntity {
     id?: string;
 
     @Column()
-    name?: string;
+    type?: string;
 
     @Column()
-    quantity?: number;
+    sender?: string;
 
     @Column()
-    'unit cost'?: number;
+    reciepient?: string;
 
     @Column()
-    created!: Date
+    message?: string
 
-    @Column()
-    'image url'?: string;
-
-    @Column()
+    @Column({type:String,default:""})
     description?: string;
+
+    @CreateDateColumn({type:String,default:`${new Date()}`})
+    'created at'?: string;
+
+    @UpdateDateColumn({type:String,default:`${new Date()}`})
+   'updated at'?: string;
 }

@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class InventoryEntity {
@@ -10,17 +10,26 @@ export class InventoryEntity {
     name?: string;
 
     @Column()
-    quantity?: number;
+    'estimated budget'?: number;
 
     @Column()
-    'unit cost'?: number;
+    'actual budget'?: number;
 
     @Column()
-    created!: Date
+    products?: string
 
-    @Column()
-    'image url'?: string;
+    @Column({type:String,default:"Admin"})
+    user?: string;
 
-    @Column()
+    @Column({type:String,default:""})
     description?: string;
+
+    @Column()
+    status?: string;
+
+    @CreateDateColumn({type:String,default:`${new Date()}`})
+    'created at'?: string;
+
+    @UpdateDateColumn({type:String,default:`${new Date()}`})
+   'updated at'?: string;
 }

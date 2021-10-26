@@ -1,7 +1,7 @@
 <template>
-  <section class="parent-container">
+  <section class="parent-container relative">
     <div
-      class="list-container w-full bg-white pt-8"
+      class="list-container w-full bg-white"
       :class="{
         'bg-gray-500':
           openAddForm || openDeleteForm || openEditForm || openDetailsForm,
@@ -9,10 +9,15 @@
     >
       <div class="search-action-btns flex items-center mb-4">
         <button class="add-btn app-btn relative left-28" @click="addNewForm">
-          New {{options.entity}}
+          <i class="fas fa-plus-circle" aria-hidden="true"></i>
+          New {{ options.entity }}
         </button>
         <div class="search_form w-1/2 mx-auto my-3">
-          <input type="text" class="form-control" placeholder="Search..." />
+          <input
+            type="text"
+            class="form-control text-center"
+            :placeholder="'Filter ' + options.entity ?? '...' + '...'"
+          />
         </div>
         <!-- @mouseenter="toggleSideAction"  can replace @click if need be -->
         <span
@@ -61,7 +66,7 @@
         </div>
       </div>
 
-      <div class="list-items flex justify-evenly items-center font-extrabold">
+      <!-- <div class="list-items flex justify-evenly items-center font-extrabold">
         <span
           class="entity w-1/6 text-center"
           v-for="(title, index) in listingTitles"
@@ -108,22 +113,112 @@
           />
         </span>
 
-        <span
+        <p
           class="action-items flex justify-evenly items-center w-1/6"
-          v-if="options.actions"
+          v-if="options.actionBtns"
         >
-          <i class="add-item mx-2 cursor-pointer" @click="detailsForm(data)">
-            <img src="@/assets/feather_icons/eye.svg" alt="" srcset="" />
-          </i>
-          <i class="add-item mx-2" @click="editForm(data)">
-            <img src="@/assets/feather_icons/edit.svg" alt="" srcset="" />
-          </i>
-          <i class="add-item mx-2" @click="deleteForm(data)">
-            <img src="@/assets/feather_icons/trash-2.svg" alt="" srcset="" />
-          </i>
-        </span>
+          <span @click="detailsForm(data)">
+            <i class="far fa-eye mx-2 cursor-pointer text-yellow-600"></i>
+          </span>
+          <span @click="editForm(data)">
+            <i class="far fa-edit mx-2 text-green-500"></i>
+          </span>
+          <span @click="deleteForm(data)">
+            <i class="far fa-trash-alt mx-2 text-red-500"></i>
+          </span>
+        </p>
+      </div> -->
+    </div>
+
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <div class="flex flex-col">
+      <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div
+            class="
+              shadow
+              overflow-hidden
+              border-b border-gray-200
+              sm:rounded-lg
+            "
+          >
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    v-for="(title, index) in listingTitles"
+                    :key="index"
+                    scope="col"
+                    class="
+                      px-6
+                      py-3
+                      text-xs
+                      font-extrabold
+                      text-black
+                      uppercase
+                      tracking-wider
+                      text-center
+                    "
+                  >
+                    {{ title !== 'Action' ? title : '' }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr v-for="(data, index) of listData" :key="index">
+                  <td
+                    v-for="(entry, index2) in formatedTitles"
+                    :key="index2"
+                    class="px-6 py-4 text-center"
+                  >
+                    {{
+                      (typeof data[`${entry}`] === "string" &&
+                        !data[`${entry}`].trim().endsWith(".svg")) ||
+                      typeof data[`${entry}`] === "number"
+                        ? data[`${entry}`]
+                        : ""
+                    }}
+
+                    <img
+                      v-if="
+                        typeof data[`${entry}`] === 'string' &&
+                        data[`${entry}`].trim().endsWith('.svg')
+                      "
+                      :src="data[`${entry}`]"
+                      alt="image here"
+                    />
+            
+                    <p
+                      class="
+                        action-items
+                        flex
+                        text-center
+                        relative left-4
+                        w-1/6
+                      "
+                      v-if="options.actionBtns && entry == 'action'"
+                    >
+                      <span @click="detailsForm(data)">
+                        <i
+                          class="far fa-eye mx-2 cursor-pointer text-yellow-600"
+                        ></i>
+                      </span>
+                      <span @click="editForm(data)">
+                        <i class="far fa-edit mx-2 cursor-pointer text-green-500"></i>
+                      </span>
+                      <span @click="deleteForm(data)">
+                        <i class="far fa-trash-alt mx-2 cursor-pointer text-red-500"></i>
+                      </span>
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
+
     <Add
       v-if="openAddForm"
       @closeForm="openAddForm = !openAddForm"

@@ -1,4 +1,5 @@
 import { createConnection } from "typeorm";
+import { CreditEntity } from "../database/models/entities/credit.entity";
 import { GroupEntity } from "../database/models/entities/group.entity";
 import { InventoryEntity } from "../database/models/entities/inventory.entity";
 import { InvoiceEntity } from "../database/models/entities/invoice.entity";
@@ -18,8 +19,22 @@ const config = {
         return await createConnection({
             type: "sqlite",
             database: "kingscorp.db",
-            synchronize:true,
-            entities:[UserEntity,ProductEntity,GroupEntity,SalesEntity,PersonnelEntity,InvoiceEntity,InventoryEntity,RoleEntity,PermissionEntity,ServiceEntity,NotificationEntity,StockEntity,]
+            synchronize: true,
+            entities: [
+                UserEntity,
+                ProductEntity,
+                GroupEntity,
+                SalesEntity,
+                PersonnelEntity,
+                InvoiceEntity,
+                InventoryEntity,
+                RoleEntity,
+                PermissionEntity,
+                ServiceEntity,
+                NotificationEntity,
+                StockEntity,
+                CreditEntity
+            ]
         });
     },
     apiKey: process.env.APP_KEY,

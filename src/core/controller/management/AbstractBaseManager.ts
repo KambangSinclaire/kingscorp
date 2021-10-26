@@ -41,6 +41,7 @@ export default abstract class AbstractBaseManager {
             const newResource = await AbstractBaseManager.repository.save(resource);
             return newResource;
         } catch (error: any) {
+            console.log("Error occured ", error);
             return error;
         }
     }

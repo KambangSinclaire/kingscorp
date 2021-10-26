@@ -6,27 +6,27 @@
  export class GroupManager extends AbstractBaseManager {
  
      // add new Group
-     async addGroup(event: Event, payload: any) {
+     async addGroup(payload: any) {
          return GroupManager.addResource(payload)
      }
  
      //get all Groups
-     async getAllGroups() {
+     async getGroups(payload: any) {
          return GroupManager.getAllResources();
      }
  
      // delete a Group
-     async deleteGroup(event: Event, id: string | any) {
+     async deleteGroup(id: string | any) {
          return GroupManager.deleteResource(id)
      }
  
      // edit a Group
-     async editGroup(event: Event, payload: any) {
+     async editGroup(payload: any) {
          return GroupManager.updateResource(payload)
      }
  
      // get a single Group
-     async singleGroup(event: Event, id: any) {
+     async getSingleGroup(id: any) {
          return GroupManager.getSingleResource(id);
      }
  }

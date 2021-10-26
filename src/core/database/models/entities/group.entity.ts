@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class GroupEntity {
@@ -10,17 +10,17 @@ export class GroupEntity {
     name?: string;
 
     @Column()
-    quantity?: number;
+    roles?: string;
 
-    @Column()
-    'unit cost'?: number;
-
-    @Column()
-    created!: Date
-
-    @Column()
-    'image url'?: string;
-
-    @Column()
+    @Column({type:String,default:"Admin"})
+    user?: string;
+    
+    @Column({type:String,default:""})
     description?: string;
+
+    @CreateDateColumn({type:String,default:`${new Date()}`})
+    'created at'?: string;
+
+    @UpdateDateColumn({type:String,default:`${new Date()}`})
+   'updated at'?: string;
 }

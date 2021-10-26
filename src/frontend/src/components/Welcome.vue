@@ -67,15 +67,11 @@
 
   <section class="flex">
     <div class="quick-actions grid grid-cols-3 mx-4 gap-4 w-4/6">
-      <InfoCard :setup="{ ...cardSetup }" />
-      <InfoCard :setup="{ ...cardSetup }" />
-      <InfoCard :setup="{ ...cardSetup }" />
-      <InfoCard :setup="{ ...cardSetup }" />
-      <InfoCard :setup="{ ...cardSetup }" />
+      <InfoCard v-for="(setup,index) of cardSetup" :key="index" :setup="setup" />
     </div>
     <div class="quick-actions grid grid-cols-1 mx-4 gap-2 w-2/6">
-      <InfoCard :setup="{ ...cardSetup }" />
-      <InfoCard :setup="{ ...cardSetup }" />
+      <InfoCard :setup="cardSetup[0]" />
+      <InfoCard :setup="cardSetup[1]" />
     </div>
   </section>
 </template>
@@ -83,32 +79,116 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import InfoCard from "./reusable/Info-Card.vue";
+import Charts from "./reusable/statistics/Charts.vue";
 @Options({
-  props: {
-    msg: String,
-  },
   components: {
     InfoCard,
+    Charts
   },
 })
 export default class Welcome extends Vue {
   data() {
     return {
-      cardSetup: {
-        title: "Product",
-        range: 10,
-        btnMore: 78,
-        description: "Test Products",
-        topImage: "@/assets/feather_icons/user.svg",
-        actions: {
-          showMore: "show product listing",
-          showStatistics: "show product statistics",
+      cardSetup: [
+        {
+          title: "Products",
+          range: 10,
+          btnMore: 78,
+          description: "Test Products",
+          topImage: "fas fa-archive",
+          bgColor:'bg-gray-200',
+          actions: {
+            showMore: "show product listing",
+            showStatistics: "show product statistics",
+          },
+          routes: {
+            toListingView: "/products",
+            toStatisticsView: "/products/statistics",
+          },
         },
-        routes: {
-          toListingView: "/products",
-          toStatisticsView: "/products/statistics",
+ {
+          title: "Services",
+          range: 10,
+          btnMore: 78,
+          bgColor:'bg-yellow-200',
+          description: "KingsCorp currently offers photocopy, scanning, printing and graphich design services. Please feel free to contact us for all your documentation needs",
+          topImage: "fas fa-archive",
+          actions: {
+            showMore: "show product listing",
+            showStatistics: "show product statistics",
+          },
+          routes: {
+            toListingView: "/service",
+            toStatisticsView: "/products/statistics",
+          },
         },
-      },
+        {
+          title: "Sale",
+          range: 10,
+          btnMore: 78,
+          bgColor:'bg-blue-200',
+          description: "Test sales",
+          topImage: "fab fa-cc-mastercard",
+          actions: {
+            showMore: "show sale listing",
+            showStatistics: "show sale statistics",
+          },
+          routes: {
+            toListingView: "/sales",
+            toStatisticsView: "/sales/statistics",
+          },
+        },
+
+        {
+          title: "inventory",
+          range: 10,
+          btnMore: 78,
+          bgColor:'bg-red-200',
+          description: "Test inventories",
+          topImage: "far fa-credit-card",
+          actions: {
+            showMore: "show inventory listing",
+            showStatistics: "show inventory statistics",
+          },
+          routes: {
+            toListingView: "/inventory",
+            toStatisticsView: "/inventories/statistics",
+          },
+        },
+
+        {
+          title: "Invoice",
+          range: 10,
+          btnMore: 78,
+          bgColor:'bg-gray-200',
+          description: "Test invoices",
+          topImage: "fas fa-file-invoice-dollar",
+          actions: {
+            showMore: "show invoice listing",
+            showStatistics: "show invoice statistics",
+          },
+          routes: {
+            toListingView: "/invoice",
+            toStatisticsView: "/invoices/statistics",
+          },
+        },
+        {
+          title: "Personel",
+          range: 60,
+          btnMore: 78,
+          bgColor:'bg-gray-200',
+          description: "Test Personels",
+          topImage: "fas fa-user-friends",
+          actions: {
+            showMore: "show Personel listing",
+            showStatistics: "show Personel statistics",
+          },
+          routes: {
+            toListingView: "/personnel",
+            toStatisticsView: "/personnel/statistics",
+          },
+        },
+      ],
     };
   }
 }

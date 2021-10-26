@@ -6,27 +6,27 @@
  export class StockManager extends AbstractBaseManager {
  
      // add new Stock
-     async addStock(event: Event, payload: any) {
+     async addStock(payload: any) {
          return StockManager.addResource(payload)
      }
  
      //get all Stocks
-     async getAllStocks() {
+     async getStocks(payload: any) {
          return StockManager.getAllResources();
      }
  
      // delete a Stock
-     async deleteStock(event: Event, id: string | any) {
+     async deleteStock(id: string | any) {
          return StockManager.deleteResource(id)
      }
  
      // edit a Stock
-     async editStock(event: Event, payload: any) {
+     async editStock(payload: any) {
          return StockManager.updateResource(payload)
      }
  
      // get a single Stock
-     async singleStock(event: Event, id: any) {
+     async getSingleStock(id: any) {
          return StockManager.getSingleResource(id);
      }
  }

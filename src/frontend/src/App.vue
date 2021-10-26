@@ -2,36 +2,27 @@
   <div id="nav" class="py-4">
     <Navbar />
   </div>
-  <Home id="nav" />
+  <div class="flex w-full p-8 pt-4">
+    <section class="sidebar w-1/6">
+      <Sidebar />
+    </section>
+    <section class="w-5/6">
+      <router-view />
+    </section>
+  </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import Home from "@/views/Home.vue";
+import Sidebar from "./components/Sidebar.vue";
 import Navbar from "@/components/Navbar.vue";
-import ElectronUI from "@/utils/electron.util.ts";
+
+
 @Options({
   components: {
-    Home,
+    Sidebar,
     Navbar,
-  },
-  computed: {
-    wait() {
-      ElectronUI.ipcRenderer.on("getProducts", (data: any) => {
-        alert("Hello here ");
-      });
-    },
-  },
-  watch: {
-    wait2() {
-      ElectronUI.ipcRenderer.on("getProducts", (data: any) => {
-        alert("Hello here ");
-      });
-    },
-  },
-  updated() {
-    this.wait2;
-  },
+  }
 })
 export default class App extends Vue {}
 </script>
@@ -45,7 +36,6 @@ export default class App extends Vue {}
 }
 
 #nav {
-  // padding: 0px 40px 40px 40px;
   a {
     font-weight: bold;
     color: #2c3e50;

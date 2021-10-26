@@ -13,16 +13,23 @@ import Preferences from "../components/settings/Preferences.vue";
 import Personnel from "../components/modules/personnel/Personnel.vue";
 import Inventory from "../components/modules/inventory/Inventory.vue";
 import Sales from "../components/modules/sales/Sales.vue";
+import Service from "../components/modules/services/Services.vue";
 import Notifications from "../components/modules/notifications/Notification.vue";
 import Credits from "../components/modules/credits/Credits.vue";
 import Invoices from "../components/modules/invoices/Invoices.vue";
 import Profile from "../components/auth/Profile.vue";
+import Charts from "../components/reusable/statistics/Charts.vue";
 
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Home",
+    component: Home,
+  },
+  {
+    path: "/explore/dashboard",
+    name: "Explore",
     component: Welcome,
   },
   {
@@ -71,7 +78,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Inventory,
   },
   {
-    path: "/about",
+    path: "/recent-activity",
     name: "About",
     component: About
   },
@@ -81,14 +88,19 @@ const routes: Array<RouteRecordRaw> = [
     component: Welcome
   },
   {
+    path: "/service",
+    name: "Service",
+    component: Service
+  },
+  {
     path: "/profile",
     name: "Profile",
     component: Profile
   },
   {
-    path: "/signup",
-    name: "Signup",
-    component: About
+    path: "/statistics",
+    name: "Statistics",
+    component: Charts
   },
   {
     path: "/settings",

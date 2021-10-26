@@ -6,27 +6,27 @@
  export class NotificationManager extends AbstractBaseManager {
  
      // add new Notification
-     async addNotification(event: Event, payload: any) {
+     async addNotification(payload: any) {
          return NotificationManager.addResource(payload)
      }
  
      //get all Notifications
-     async getAllNotifications() {
+     async getNotifications(payload: any) {
          return NotificationManager.getAllResources();
      }
  
      // delete a Notification
-     async deleteNotification(event: Event, id: string | any) {
+     async deleteNotification(id: string | any) {
          return NotificationManager.deleteResource(id)
      }
  
      // edit a Notification
-     async editNotification(event: Event, payload: any) {
+     async editNotification(payload: any) {
          return NotificationManager.updateResource(payload)
      }
  
      // get a single Notification
-     async singleNotification(event: Event, id: any) {
+     async getSingleNotification(id: any) {
          return NotificationManager.getSingleResource(id);
      }
  }

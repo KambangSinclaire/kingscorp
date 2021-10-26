@@ -1,27 +1,33 @@
 <template>
-  <section class="login-section w-1/2 m-auto relative top-8">
-    <form class="form-container basic-blue-gradient">
-      <h1 class="white-medium-center-header">kingscorp Welcome's you</h1>
-      <h1 class="white-medium-center-header">Login to your account</h1>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter your name or email"
-      />
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter your password"
-      />
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter information here"
-      />
-
-      <button class="app-btn" @click.prevent="login">Login</button>
-
-      <small class="text-white relative top-4">We celebrate you!</small>
+  <section class="container w-1/2 m-auto relative top-20">
+    <form
+      class="container border shadow rounded-lg p-8 flex flex-col items-center"
+    >
+      <h1 class="medium-center-header pb-4">
+        Personnel CheckIn Authentication
+      </h1>
+      <div class="input-element w-full relative my-4">
+        <input
+          type="text"
+          placeholder="Personnel Name"
+          class="form-control"
+          v-model="user.username"
+        />
+        <i class="fas fa-users-cog cursor-pointer absolute top-6 right-8"></i>
+      </div>
+      <div class="input-element w-full relative my-4">
+        <input
+          type="password"
+          placeholder="Password"
+          class="form-control"
+          v-model="user.password"
+        />
+        <i class="fas fa-eye cursor-pointer absolute top-6 right-8"></i>
+      </div>
+      <button class="app-btn" @click="login">
+        <i class="fas fa-sign-in-alt"></i>
+        Login
+      </button>
     </form>
   </section>
 </template>
@@ -31,29 +37,32 @@ import { Options, Vue } from "vue-class-component";
 import IPC from "../../utils/ipc-renderer.util";
 import { AppActionEvents } from "../../events/app.events";
 
-@Options({})
+@Options({
+  methods: {
+    login() {
+      if (this.user.username !== "" && this.user.password !== "") {
+        this.$store.dispatch(AppActionEvents.user.login, this.user);
+        this.$router.push("/explore/dashboard");
+      } else {
+        alert("Please login");
+      }
+    },
+  },
+  mounted() {
+    // check if already logged in
+    if (this.$store.getters.isLoggedIn) {
+      this.$router.push("/explore/dashboard");
+    }
+  },
+})
 export default class Login extends Vue {
   data() {
     return {
-      // user: {
-      //   username,
-      //   email,
-      //   password,
-      // },
-      login: () => {
-        IPC.ipcRequestTrigger(AppActionEvents.user.login,{});
+      user: {
+        username: "",
+        password: "",
       },
     };
-  }
-
-  mounted() {
-    IPC.ipcResponseHandler(
-      AppActionEvents.user.login,
-      (event: any, payload: any) => {
-        console.log(event);
-        console.log(payload);
-      }
-    );
   }
 }
 </script>

@@ -6,27 +6,27 @@ import AbstractBaseManager from "../AbstractBaseManager";
 export class ProductManager extends AbstractBaseManager {
 
     // add new product
-    async addProduct(event: Event, payload: any) {
+    async addProduct(payload: any) {
         return ProductManager.addResource(payload)
     }
 
     //get all products
-    async getAllProducts() {
+    async getProducts(payload: any) {
         return ProductManager.getAllResources();
     }
 
     // delete a product
-    async deleteProduct(event: Event, id: string | any) {
+    async deleteProduct(id: string | any) {
         return ProductManager.deleteResource(id)
     }
 
     // edit a product
-    async editProduct(event: Event, payload: any) {
+    async editProduct(payload: any) {
         return ProductManager.updateResource(payload)
     }
 
     // get a single product
-    async singleProduct(event: Event, id: any) {
+    async getSingleProduct(id: any) {
         return ProductManager.getSingleResource(id);
     }
 }

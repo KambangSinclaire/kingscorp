@@ -12,6 +12,7 @@ import personnel from "./modules/personnel/personnel";
 
 export default createStore({
   state: {
+    isLoggedIn: false,
     preferences: {
       Stock: false,
       Products: true,
@@ -30,6 +31,9 @@ export default createStore({
     getDropDowns(state) {
       return state.dropdownItems;
     },
+    isLoggedIn(state) {
+      return state.isLoggedIn;
+    }
   },
   mutations: {
     setDropdownActions(state, payload) {

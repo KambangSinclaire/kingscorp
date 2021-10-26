@@ -1,56 +1,66 @@
 <template>
   <Listing
     :listData="invoices"
+    :options="{ actionBtns: true, inputs, entity, actions }"
     :listingTitles="titles"
-    :options="{ actions: true }"
   />
 </template>
 
 <script>
 import { Options, Vue } from "vue-class-component";
 import Listing from "../../reusable/Listing.vue";
+import { AppActionEvents } from "../../../events/app.events";
 @Options({
+  computed: {
+    invoices() {
+      const invoices = this.$store.getters.getInvoices;
+      return invoices;
+    },
+  },
+  methods: {},
+
   components: {
     Listing,
   },
+
+  mounted() {
+    this.$store.dispatch(AppActionEvents.invoice.retrieve);
+  },
 })
-export default class Invoices extends Vue {
+export default class Invoice extends Vue {
   data() {
     return {
-      titles: ["Client", "Total Amount","Items", "Date", "Due date", "Note","Status"],
-      invoices: [
-        {
-          client: "Kambang Calis",
-          items:"papers, books",
-          'total amount': "156500",
-          date: "22-07-2021",
-          'due date': "28-07-2021",
-          status:"completed",
-          note: "requested for papers",
-        },
-        {
-          client: "Kambang Divine",
-          items:"stapplers, pens",
-          'total amount': "98000",
-          date: "12-07-2021",
-          'due date': "22-07-2021",
-          status:"pending",
-          note: "requested for stapplers",
-        },
-        {
-          client: "Kambang Kirian",
-          items:"catridges, rulers",
-          'total amount': "86000",
-          date: "01-07-2021",
-          'due date': "03-07-2021",
-          status:"cancelled",
-          note: "requested for catridges",
-        },
+      titles: [
+        "Total amount",
+        "Items",
+        "Expected date",
+        "User",
+        "Description",
+        "Status",
+        "Client",
+        "Expiry date",
       ],
+      inputs: {
+        "total amount": "number",
+        items: "text",
+        status: "text",
+        description: "textarea",
+        "expected date": "date",
+        user: "text",
+        client: "text",
+        "Expiry date": "date",
+      },
+      entity: "Invoice",
+      actions: {
+        add: AppActionEvents.invoice.add,
+        edit: AppActionEvents.invoice.edit,
+        delete: AppActionEvents.invoice.delete,
+        details: AppActionEvents.invoice.retrieveSingle,
+        list: AppActionEvents.invoice.retrieve,
+      },
     };
   }
 }
 </script>
-
 <style>
 </style>

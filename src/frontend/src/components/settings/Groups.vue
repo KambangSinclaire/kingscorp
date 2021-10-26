@@ -1,46 +1,59 @@
 <template>
-   <Listing :listData="groups" :listingTitles="titles" :options="{actions:true}"/>
+  <Listing
+    :listData="groups"
+    :options="{ actionBtns: true, inputs, entity, actions }"
+    :listingTitles="titles"
+  />
 </template>
 
 <script>
-import {Options, Vue } from "vue-class-component";
+import { Options, Vue } from "vue-class-component";
 import Listing from "../reusable/Listing.vue";
+import { AppActionEvents } from "../../events/app.events";
 @Options({
-    components:{
-        Listing
+  computed: {
+    groups() {
+      const groups = this.$store.getters.getGroups;
+      return groups;
     },
-})
-export default class Groups extends Vue {
-  data(){
-        return {
-            titles:["Group","Description","Suggestion","Impact","Access"],
-            groups:[{
-                group:"Engineers",
-                description:"The engineering and tech arm of our org",
-                suggestion:"good all those with engineering related duties in the company",
-                impact:"High",
-                access:"login enabled"
-            },
-            {
-                group:"Marketting",
-                description:"The marketting and sales arm of the org",
-                suggestion:"good for those involved in marketting and sales duties",
-                impact:"High",
-                access:"login enabled"
-            },
-            {
-                group:"Operations",
-                description:"Those involved with processes like audits, legal cases etc",
-                suggestion:"good for legal practitioners of the org, analysts and researchers",
-                impact:"High",
-                access:"login enabled"
-            }]
+  },
+  methods: {},
 
-        }
-    }
+  components: {
+    Listing,
+  },
+
+  mounted() {
+    this.$store.dispatch(AppActionEvents.group.retrieve);
+  },
+})
+export default class Group extends Vue {
+  data() {
+    return {
+      titles: [
+        "Name",
+        "Roles",
+        "User",
+        "Description"
+      ],
+      inputs: {
+        name: "text",
+        roles: "text",
+        description: "textarea",
+        user: "text",
+      },
+      entity: "Group",
+      actions: {
+        add: AppActionEvents.group.add,
+        edit: AppActionEvents.group.edit,
+        delete: AppActionEvents.group.delete,
+        details: AppActionEvents.group.retrieveSingle,
+        list: AppActionEvents.group.retrieve,
+      },
+    };
+  }
 }
 </script>
 
 <style>
-
 </style>
