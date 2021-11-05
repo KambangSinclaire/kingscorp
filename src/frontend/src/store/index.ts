@@ -9,6 +9,7 @@ import group from "./modules/group/group";
 import service from "./modules/services/service";
 import credit from "./modules/credit/credit";
 import personnel from "./modules/personnel/personnel";
+import category from "./modules/category/category";
 
 export default createStore({
   state: {
@@ -53,5 +54,5 @@ export default createStore({
       ctx.commit('setDropdownActions', payload);
     },
   },
-  modules: { product, stock, sale, personnel, invoice, inventory, service, role, group, credit },
+  modules: { product, stock, sale, personnel, invoice, inventory, service, role, group, credit, category },
 });

@@ -12,7 +12,7 @@
  
      //get all Saless
      async getSales(payload: any) {
-         return SalesManager.getAllResources();
+         return SalesManager.getAllResources(payload);
      }
  
      // delete a Sales

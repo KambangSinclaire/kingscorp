@@ -12,6 +12,8 @@ import { SalesEntity } from "../database/models/entities/sales.entity";
 import { ServiceEntity } from "../database/models/entities/service.entity";
 import { StockEntity } from "../database/models/entities/stock.entity";
 import { UserEntity } from "../database/models/entities/user.entity";
+import { CategoryEntity } from "../database/models/entities/categories.entity";
+import { ClientEntity } from "../database/models/entities/client.entity";
 
 require('dotenv').config();
 const config = {
@@ -33,7 +35,9 @@ const config = {
                 ServiceEntity,
                 NotificationEntity,
                 StockEntity,
-                CreditEntity
+                CreditEntity,
+                CategoryEntity,
+                ClientEntity
             ]
         });
     },

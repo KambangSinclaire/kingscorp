@@ -1,6 +1,6 @@
 <template>
   <Listing
-    :options="{ actionBtns: true, inputs, entity, actions }"
+    :options="{ actionBtns: true, inputs, entity, actions, relations }"
     :listData="products"
     :listingTitles="titles"
   />
@@ -17,14 +17,16 @@ import Listing from "../../reusable/Listing.vue";
       return prods;
     },
   },
-  methods: {},
-
   components: {
     Listing,
   },
-
   mounted() {
-    this.$store.dispatch(AppActionEvents.product.retrieve);
+    let relations = [];
+    for (const [key, value] of Object.entries(this.relations)) {
+      relations.push(`${key}`);
+    }
+    const payload = { relations };
+    this.$store.dispatch(AppActionEvents.product.retrieve, payload);
   },
 })
 export default class Product extends Vue {
@@ -36,21 +38,26 @@ export default class Product extends Vue {
         "Unit Cost",
         "Image Url",
         "Description",
-        "Inventory",
+        // "Inventory",
         "Stock",
         "Category",
       ],
       inputs: {
         name: "text",
         quantity: "number",
-        stock: "text",
+        stock: "select",
         description: "textarea",
         "unit cost": "number",
         "image url": "file",
-        inventory: "text",
-        category: "text",
+        // inventory: "select",
+        category: "select",
       },
       entity: "Product",
+      relations: {
+        category: "Categories",
+        stock: "Stocks",
+        // inventory: "Inventories",
+      },
       actions: {
         add: AppActionEvents.product.add,
         edit: AppActionEvents.product.edit,
@@ -58,7 +65,7 @@ export default class Product extends Vue {
         details: AppActionEvents.product.retrieveSingle,
         list: AppActionEvents.product.retrieve,
       },
-    };
+    }
   }
 }
 </script>

@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { ProductEntity } from "./product.entity";
 
 @Entity()
 export class StockEntity {
@@ -24,8 +25,8 @@ export class StockEntity {
     @Column()
     status?: string;
 
-    @Column()
-    products?: string
+    // @OneToMany(()=>ProductEntity,product=>product.stock)
+    // products!: ProductEntity[]
 
     @Column()
     user?: string;

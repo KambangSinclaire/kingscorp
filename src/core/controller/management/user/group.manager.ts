@@ -12,7 +12,7 @@
  
      //get all Groups
      async getGroups(payload: any) {
-         return GroupManager.getAllResources();
+         return GroupManager.getAllResources(payload);
      }
  
      // delete a Group

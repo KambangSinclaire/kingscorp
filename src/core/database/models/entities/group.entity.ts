@@ -4,23 +4,23 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 export class GroupEntity {
 
     @PrimaryGeneratedColumn()
-    id?: string;
+    id!: string;
 
     @Column()
-    name?: string;
+    name!: string;
 
     @Column()
-    roles?: string;
+    roles!: string;
 
     @Column({type:String,default:"Admin"})
-    user?: string;
+    user!: string;
     
     @Column({type:String,default:""})
-    description?: string;
+    description!: string;
 
     @CreateDateColumn({type:String,default:`${new Date()}`})
-    'created at'?: string;
+    'created at'!: string;
 
     @UpdateDateColumn({type:String,default:`${new Date()}`})
-   'updated at'?: string;
+   'updated at'!: string;
 }

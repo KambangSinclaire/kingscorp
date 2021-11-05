@@ -12,7 +12,7 @@
  
      //get all Personnels
      async getPersonnels(payload: any) {
-         return PersonnelManager.getAllResources();
+         return PersonnelManager.getAllResources(payload);
      }
  
      // delete a Personnel

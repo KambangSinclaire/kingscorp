@@ -12,7 +12,7 @@ export class InventoryManager extends AbstractBaseManager {
 
     //get all Inventorys
     async getInventories(payload: any) {
-        return InventoryManager.getAllResources();
+        return InventoryManager.getAllResources(payload);
     }
 
     // delete a Inventory

@@ -12,7 +12,7 @@
  
      //get all Notifications
      async getNotifications(payload: any) {
-         return NotificationManager.getAllResources();
+         return NotificationManager.getAllResources(payload);
      }
  
      // delete a Notification

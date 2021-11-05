@@ -12,7 +12,7 @@
  
      //get all Services
      async getServices(payload: any) {
-         return ServiceManager.getAllResources();
+         return ServiceManager.getAllResources(payload);
      }
  
      // delete a Service

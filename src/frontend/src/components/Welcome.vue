@@ -24,7 +24,7 @@
         <span>helo test</span>
       </div>
       <div class="card summary-cards">
-        <p>Credits</p>
+        <p>Notifications</p>
         <img src="@/assets/material_icons/analytics-outline.svg" alt="summary" class="w-1/4 cursor-pointer">
         <span>helo test</span>
       </div>
@@ -67,7 +67,11 @@
 
   <section class="flex">
     <div class="quick-actions grid grid-cols-3 mx-4 gap-4 w-4/6">
-      <InfoCard v-for="(setup,index) of cardSetup" :key="index" :setup="setup" />
+      <InfoCard
+        v-for="(setup, index) of cardSetup"
+        :key="index"
+        :setup="setup"
+      />
     </div>
     <div class="quick-actions grid grid-cols-1 mx-4 gap-2 w-2/6">
       <InfoCard :setup="cardSetup[0]" />
@@ -83,7 +87,7 @@ import Charts from "./reusable/statistics/Charts.vue";
 @Options({
   components: {
     InfoCard,
-    Charts
+    Charts,
   },
 })
 export default class Welcome extends Vue {
@@ -96,7 +100,7 @@ export default class Welcome extends Vue {
           btnMore: 78,
           description: "Test Products",
           topImage: "fas fa-archive",
-          bgColor:'bg-gray-200',
+          bgColor: "bg-gray-200",
           actions: {
             showMore: "show product listing",
             showStatistics: "show product statistics",
@@ -106,12 +110,13 @@ export default class Welcome extends Vue {
             toStatisticsView: "/products/statistics",
           },
         },
- {
+        {
           title: "Services",
           range: 10,
           btnMore: 78,
-          bgColor:'bg-yellow-200',
-          description: "KingsCorp currently offers photocopy, scanning, printing and graphich design services. Please feel free to contact us for all your documentation needs",
+          bgColor: "bg-yellow-200",
+          description:
+            "KingsCorp currently offers photocopy, scanning, printing and graphich design services. Please feel free to contact us for all your documentation needs",
           topImage: "fas fa-archive",
           actions: {
             showMore: "show product listing",
@@ -126,7 +131,7 @@ export default class Welcome extends Vue {
           title: "Sale",
           range: 10,
           btnMore: 78,
-          bgColor:'bg-blue-200',
+          bgColor: "bg-blue-200",
           description: "Test sales",
           topImage: "fab fa-cc-mastercard",
           actions: {
@@ -140,18 +145,18 @@ export default class Welcome extends Vue {
         },
 
         {
-          title: "inventory",
+          title: "Notification",
           range: 10,
           btnMore: 78,
-          bgColor:'bg-red-200',
+          bgColor: "bg-red-200",
           description: "Test inventories",
-          topImage: "far fa-credit-card",
+          topImage: "far fa-Notification-card",
           actions: {
-            showMore: "show inventory listing",
-            showStatistics: "show inventory statistics",
+            showMore: "show Notification listing",
+            showStatistics: "show Notification statistics",
           },
           routes: {
-            toListingView: "/inventory",
+            toListingView: "/Notification",
             toStatisticsView: "/inventories/statistics",
           },
         },
@@ -160,7 +165,7 @@ export default class Welcome extends Vue {
           title: "Invoice",
           range: 10,
           btnMore: 78,
-          bgColor:'bg-gray-200',
+          bgColor: "bg-gray-200",
           description: "Test invoices",
           topImage: "fas fa-file-invoice-dollar",
           actions: {
@@ -176,7 +181,7 @@ export default class Welcome extends Vue {
           title: "Personel",
           range: 60,
           btnMore: 78,
-          bgColor:'bg-gray-200',
+          bgColor: "bg-gray-200",
           description: "Test Personels",
           topImage: "fas fa-user-friends",
           actions: {
@@ -186,6 +191,55 @@ export default class Welcome extends Vue {
           routes: {
             toListingView: "/personnel",
             toStatisticsView: "/personnel/statistics",
+          },
+        },
+        {
+          title: "Categories",
+          range: 60,
+          btnMore: 78,
+          bgColor: "bg-gray-200",
+          description: "Test Categories",
+          topImage: "fas fa-user-friends",
+          actions: {
+            showMore: "show Categories listing",
+            showStatistics: "show Categories statistics",
+          },
+          routes: {
+            toListingView: "/categories",
+            toStatisticsView: "/categories/statistics",
+          },
+        },
+
+        {
+          title: "Stock",
+          range: 60,
+          btnMore: 78,
+          bgColor: "bg-gray-200",
+          description: "Test Stock",
+          topImage: "fas fa-user-friends",
+          actions: {
+            showMore: "show Personel listing",
+            showStatistics: "show Stock statistics",
+          },
+          routes: {
+            toListingView: "/stock",
+            toStatisticsView: "/stock/statistics",
+          },
+        },
+        {
+          title: "Notification",
+          range: 60,
+          btnMore: 78,
+          bgColor: "bg-gray-200",
+          description: "Test Notifications",
+          topImage: "fas fa-user-friends",
+          actions: {
+            showMore: "show Notification listing",
+            showStatistics: "show Notification statistics",
+          },
+          routes: {
+            toListingView: "/notification",
+            toStatisticsView: "/notification/statistics",
           },
         },
       ],

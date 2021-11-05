@@ -12,7 +12,7 @@
  
      //get all Invoices
      async getInvoices(payload: any) {
-         return InvoiceManager.getAllResources();
+         return InvoiceManager.getAllResources(payload);
      }
  
      // delete a Invoice

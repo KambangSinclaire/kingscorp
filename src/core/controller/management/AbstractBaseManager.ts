@@ -47,11 +47,13 @@ export default abstract class AbstractBaseManager {
     }
 
     //get all resources
-    static async getAllResources() {
+    static async getAllResources(payload?: any) {
         let repository = retrieveEntity(AbstractBaseManager.entity, AbstractBaseManager.dbConnection);
         try {
-            const resources = await repository.find();
-            return resources;
+            if (payload) {
+                return await repository.find(payload);
+            }
+            return await repository.find();
         } catch (error: any) {
             return error;
         }
@@ -90,7 +92,14 @@ export default abstract class AbstractBaseManager {
         }
     }
 
-    static async queryResouces(query: Object | any) {
-
+    static async queryResouces(query: any) {
+        AbstractBaseManager.repository = retrieveEntity(AbstractBaseManager.entity, AbstractBaseManager.dbConnection);
+        try {
+            const result = await AbstractBaseManager.repository
+                .find(query)
+            return result;
+        } catch (error: any) {
+            return error;
+        }
     }
 }

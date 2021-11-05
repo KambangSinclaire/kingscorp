@@ -13,6 +13,7 @@ import Preferences from "../components/settings/Preferences.vue";
 import Personnel from "../components/modules/personnel/Personnel.vue";
 import Inventory from "../components/modules/inventory/Inventory.vue";
 import Sales from "../components/modules/sales/Sales.vue";
+import Category from "../components/modules/categories/Category.vue";
 import Service from "../components/modules/services/Services.vue";
 import Notifications from "../components/modules/notifications/Notification.vue";
 import Credits from "../components/modules/credits/Credits.vue";
@@ -101,6 +102,10 @@ const routes: Array<RouteRecordRaw> = [
     path: "/statistics",
     name: "Statistics",
     component: Charts
+  },
+  {
+    path: "/categories",
+    component: Category
   },
   {
     path: "/settings",

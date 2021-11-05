@@ -20,7 +20,7 @@
         <p class="details">{{ setup?.description }}</p>
       </div>
     </div>
-    <div class="card-footer pt-8">
+    <div class="card-footer pt-2">
       <!-- <div class="range">
         <input
           type="range"
@@ -32,13 +32,13 @@
         />
       </div> -->
       <Line :chartdata="chartdata" :options="chartOptions" class="" />
-      <div class="stack-images flex justify-between items-center pt-2">
+      <div class="stack-images flex justify-between items-center">
         <img
           src="@/assets/feather_icons/user.svg"
           alt="Products"
           class="card-logo"
         />
-        <button class="btn outline-none border rounded-lg py-2 px-4">
+        <button class="btn outline-none border rounded-lg px-4 py-2">
           {{ setup?.btnMore }} more
         </button>
       </div>

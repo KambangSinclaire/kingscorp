@@ -1,41 +1,59 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { CreditEntity } from "./credit.entity";
+import { CategoryEntity, } from "./categories.entity";
+import { SalesEntity } from "./sales.entity";
+import { InventoryEntity } from "./inventory.entity";
+import { StockEntity } from "./stock.entity";
 
 @Entity()
 export class ProductEntity {
 
     @PrimaryGeneratedColumn()
-    id?: string;
+    id!: string;
 
     @Column()
-    name?: string;
+    name!: string;
 
     @Column()
-    category?: string;
+    quantity!: number;
+
+    @Column({ type: String, default: `Admin` })
+    user!: string;
 
     @Column()
-    quantity?: number;
-
-    @Column({type:String,default:`latest`})
-    stock?: string;
-
-    @Column({type:String,default:`Admin`})
-    user?: string;
-
-    @Column({type:String,default:`new`})
-    inventory?: string;
-    
-    @Column()
-    'unit cost'?: number;
+    'unit cost'!: number;
 
     @Column()
-    'image url'?: string;
-    
-    @Column({type:String,default:``})
-    description?: string;
+    'image url'!: string;
 
-    @CreateDateColumn({type:String,default:`${new Date()}`})
-    'created at'?: string;
+    @Column({ type: String, default: `` })
+    description!: string;
 
-    @UpdateDateColumn({type:String,default:`${new Date()}`})
-   'updated at'?: string;
+    @CreateDateColumn({ type: String, default: `${new Date()}` })
+    'created at'!: string;
+
+    @UpdateDateColumn({ type: String, default: `${new Date()}` })
+    'updated at'!: string;
+
+    @ManyToMany(() => CreditEntity, credit => credit.products, { cascade: true })
+    credits!: CreditEntity
+
+
+    @ManyToOne(() => StockEntity)
+    @JoinColumn({ name: "stock" })
+    stock!: StockEntity;
+
+    // @ManyToOne(() => InventoryEntity)
+    // inventory!: InventoryEntity;
+
+    // @OneToMany(() => ClientEntity, client => client.products)
+    // @JoinColumn()
+    // client!: ClientEntity
+
+    @ManyToOne(() => CategoryEntity)
+    @JoinColumn({ name: "category" })
+    category!: CategoryEntity;
+
+    @ManyToMany(() => SalesEntity, sales => sales.items)
+    sales!: SalesEntity
 }

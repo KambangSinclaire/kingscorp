@@ -21,8 +21,8 @@ const actions = {
             ctx.commit('setProduct', data);
         });
     },
-    getProducts(ctx: any) {
-        IPC.ipcRequestTrigger(AppActionEvents.product.retrieve).then((data) => {
+    getProducts(ctx: any,payload:any) {
+        IPC.ipcRequestTrigger(AppActionEvents.product.retrieve,payload).then((data) => {
             ctx.commit('setProducts', data);
         });
     },

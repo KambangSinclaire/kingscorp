@@ -1,32 +1,39 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { ClientEntity } from "./client.entity";
+import { ProductEntity } from "./product.entity";
 
 @Entity()
 export class CreditEntity {
 
     @PrimaryGeneratedColumn()
-    id?: string;
+    id!: string;
 
     @Column()
-    amount?: number;
+    amount!: number;
 
     @Column()
-    'expiry Date'?: string;
+    'expiry Date'!: string;
+
+    @OneToMany(() => ClientEntity, client => client.credits)
+    @JoinColumn()
+    client!: ClientEntity
+
+    @ManyToMany(() => ProductEntity, product => product.credits)
+    @JoinTable()
+    products!: ProductEntity
+
+    @Column({ type: String, default: "" })
+    description!: string;
 
     @Column()
-    client?: string;
+    items!: string;
 
-    @Column({type:String,default:""})
-    description?: string;
+    @Column({ type: String, default: "Admin" })
+    user!: string
 
-    @Column()
-    items?: string;
+    @CreateDateColumn({ type: String, default: `${new Date()}` })
+    'created at'!: string;
 
-    @Column({type:String,default:"Admin"})
-    user?:string
-
-    @CreateDateColumn({type:String,default:`${new Date()}`})
-    'created at'?: string;
-
-    @UpdateDateColumn({type:String,default:`${new Date()}`})
-   'updated at'?: string;
+    @UpdateDateColumn({ type: String, default: `${new Date()}` })
+    'updated at'!: string;
 }

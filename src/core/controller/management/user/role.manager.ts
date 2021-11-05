@@ -12,7 +12,7 @@
  
      //get all Roles
      async getRoles(payload: any) {
-         return RoleManager.getAllResources();
+         return RoleManager.getAllResources(payload);
      }
  
      // delete a Role

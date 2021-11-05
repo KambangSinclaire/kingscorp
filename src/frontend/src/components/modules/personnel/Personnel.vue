@@ -1,7 +1,7 @@
 <template>
   <Listing
     :listData="personnels"
-    :options="{ actionsBtns: true, inputs, entity, actions }"
+    :options="{ actionBtns: true, inputs, entity, actions }"
     :listingTitles="titles"
     @fetchDropDownIcons="upDateActions"
   />

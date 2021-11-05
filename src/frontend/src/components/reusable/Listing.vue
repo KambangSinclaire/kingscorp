@@ -96,19 +96,19 @@
           :key="index2"
         >
           {{
-            (typeof data[`${entry}`] === "string" &&
-              !data[`${entry}`].trim().endsWith(".svg")) ||
-            typeof data[`${entry}`] === "number"
-              ? data[`${entry}`]
+            (typeof data[entry] === "string" &&
+              !data[entry].trim().endsWith(".svg")) ||
+            typeof data[entry] === "number"
+              ? data[entry]
               : ""
           }}
 
           <img
             v-if="
-              typeof data[`${entry}`] === 'string' &&
-              data[`${entry}`].trim().endsWith('.svg')
+              typeof data[entry] === 'string' &&
+              data[entry].trim().endsWith('.svg')
             "
-            :src="data[`${entry}`]"
+            :src="data[entry]"
             alt="image here"
           />
         </span>
@@ -160,7 +160,7 @@
                       text-center
                     "
                   >
-                    {{ title !== 'Action' ? title : '' }}
+                    {{ title !== "Action" ? title : "" }}
                   </th>
                 </tr>
               </thead>
@@ -171,29 +171,35 @@
                     :key="index2"
                     class="px-6 py-4 text-center"
                   >
+                    <!-- CHECK FOR IMAGES -->
                     {{
-                      (typeof data[`${entry}`] === "string" &&
-                        !data[`${entry}`].trim().endsWith(".svg")) ||
-                      typeof data[`${entry}`] === "number"
-                        ? data[`${entry}`]
+                      (typeof data[entry] === "string" &&
+                        !data[entry].trim().endsWith(".svg")) ||
+                      typeof data[entry] === "number"
+                        ? data[entry]
                         : ""
+                    }}
+                    <!-- CHECK FOR OBJECTS -->
+                    {{
+                      typeof data[entry] === "object" ? data[entry]?.name : ""
                     }}
 
                     <img
                       v-if="
-                        typeof data[`${entry}`] === 'string' &&
-                        data[`${entry}`].trim().endsWith('.svg')
+                        typeof data[entry] === 'string' &&
+                        data[entry].trim().endsWith('.svg')
                       "
-                      :src="data[`${entry}`]"
+                      :src="data[entry]"
                       alt="image here"
                     />
-            
+
                     <p
                       class="
                         action-items
                         flex
                         text-center
-                        relative left-4
+                        relative
+                        left-4
                         w-1/6
                       "
                       v-if="options.actionBtns && entry == 'action'"
@@ -204,10 +210,20 @@
                         ></i>
                       </span>
                       <span @click="editForm(data)">
-                        <i class="far fa-edit mx-2 cursor-pointer text-green-500"></i>
+                        <i
+                          class="far fa-edit mx-2 cursor-pointer text-green-500"
+                        ></i>
                       </span>
                       <span @click="deleteForm(data)">
-                        <i class="far fa-trash-alt mx-2 cursor-pointer text-red-500"></i>
+                        <i
+                          class="
+                            far
+                            fa-trash-alt
+                            mx-2
+                            cursor-pointer
+                            text-red-500
+                          "
+                        ></i>
                       </span>
                     </p>
                   </td>
@@ -226,6 +242,7 @@
         inputs: options.inputs,
         entity: options.entity,
         actions: options.actions,
+        relations: options.relations,
       }"
     />
     <Delete
@@ -308,6 +325,10 @@ import Edit from "./Edit.vue";
     },
   },
   emits: ["toggleAddNewForm", "fetchDropDownIcons"],
+
+  mounted() {
+    console.log("here is the received data ", this.listData);
+  },
 })
 export default class Listing extends Vue {
   data() {

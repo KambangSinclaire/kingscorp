@@ -12,7 +12,7 @@ export class ProductManager extends AbstractBaseManager {
 
     //get all products
     async getProducts(payload: any) {
-        return ProductManager.getAllResources();
+        return ProductManager.getAllResources(payload);
     }
 
     // delete a product
@@ -28,5 +28,9 @@ export class ProductManager extends AbstractBaseManager {
     // get a single product
     async getSingleProduct(id: any) {
         return ProductManager.getSingleResource(id);
+    }
+
+    async getProductsByCategory(payload:any){
+        return ProductManager.queryResouces(payload);
     }
 }

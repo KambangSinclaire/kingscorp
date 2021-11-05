@@ -1,35 +1,37 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { ProductEntity } from "./product.entity";
 
 @Entity()
 export class InventoryEntity {
 
     @PrimaryGeneratedColumn()
-    id?: string;
+    id!: string;
 
     @Column()
-    name?: string;
+    name!: string;
 
     @Column()
-    'estimated budget'?: number;
+    'estimated budget'!: number;
 
     @Column()
-    'actual budget'?: number;
+    'actual budget'!: number;
+
+    // @OneToMany(()=>ProductEntity,product=>product.inventory)
+    // products!: ProductEntity[]
+
+
+    @Column({ type: String, default: "Admin" })
+    user!: string;
+
+    @Column({ type: String, default: "" })
+    description!: string;
 
     @Column()
-    products?: string
+    status!: string;
 
-    @Column({type:String,default:"Admin"})
-    user?: string;
+    @CreateDateColumn({ type: String, default: `${new Date()}` })
+    'created at'!: string;
 
-    @Column({type:String,default:""})
-    description?: string;
-
-    @Column()
-    status?: string;
-
-    @CreateDateColumn({type:String,default:`${new Date()}`})
-    'created at'?: string;
-
-    @UpdateDateColumn({type:String,default:`${new Date()}`})
-   'updated at'?: string;
+    @UpdateDateColumn({ type: String, default: `${new Date()}` })
+    'updated at'!: string;
 }

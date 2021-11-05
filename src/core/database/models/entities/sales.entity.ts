@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { ProductEntity } from "./product.entity";
 
 @Entity()
 export class SalesEntity {
@@ -10,26 +11,27 @@ export class SalesEntity {
     name?: string;
 
     @Column()
-    items?: string;
-
-    @Column()
     amount?: number;
 
     @Column()
     received?: number
 
-    @Column({type:Number,default:0})
+    @Column({ type: Number, default: 0 })
     balance?: number;
 
     @Column()
-    status?:string;
+    status?: string;
 
-    @Column({type:String,default:``})
+    @Column({ type: String, default: `` })
     description?: string;
 
-    @CreateDateColumn({type:String,default:`${new Date()}`})
+    @CreateDateColumn({ type: String, default: `${new Date()}` })
     'created at'?: string;
 
-    @UpdateDateColumn({type:String,default:`${new Date()}`})
-   'updated at'?: string;
+    @UpdateDateColumn({ type: String, default: `${new Date()}` })
+    'updated at'?: string;
+
+    @ManyToMany(() => ProductEntity, items => items.sales)
+    @JoinTable()
+    items!: ProductEntity
 }

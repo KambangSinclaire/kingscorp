@@ -12,7 +12,7 @@
  
      //get all Stocks
      async getStocks(payload: any) {
-         return StockManager.getAllResources();
+         return StockManager.getAllResources(payload);
      }
  
      // delete a Stock

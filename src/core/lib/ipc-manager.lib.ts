@@ -27,6 +27,8 @@ import { ServiceEntity } from "../database/models/entities/service.entity";
 import { CreditEntity } from "../database/models/entities/credit.entity";
 import { NotificationEntity } from "../database/models/entities/notification.entity";
 import AbstractBaseManager from "../controller/management/AbstractBaseManager";
+import { CategoryManager } from "../controller/management/category/category.manager";
+import { CategoryEntity } from "../database/models/entities/categories.entity";
 
 
 const ipcIncommingMessageHandler = (dbConnection: Connection, actionWindow: BrowserWindow) => {
@@ -101,6 +103,12 @@ const ipcIncommingMessageHandler = (dbConnection: Connection, actionWindow: Brow
     channelHandler(AppActionEvents.group.edit);
     channelHandler(AppActionEvents.group.delete);
 
+    channelHandler(AppActionEvents.category.add);
+    channelHandler(AppActionEvents.category.retrieve);
+    channelHandler(AppActionEvents.category.retrieveSingle);
+    channelHandler(AppActionEvents.category.edit);
+    channelHandler(AppActionEvents.category.delete);
+
 }
 
 
@@ -128,6 +136,10 @@ async function router(channel: string, payload: any, dbConnection: Connection, a
         AbstractBaseManager.entity = ProductEntity;
         AbstractBaseManager.dbConnection = dbConnection;
         AbstractBaseManager.window = actionWindow;
+        // const data = await productManager.getProductsByCategory({ relations: ['category'] })
+        // console.log("here is the query result ", data);
+        console.log("payload in the backend ", payload);
+
         return await productManager[channel](payload)
     }
 
@@ -167,7 +179,7 @@ async function router(channel: string, payload: any, dbConnection: Connection, a
     /**
     * Handle Inventory related events
     */
-    if (channel.includes('Inventory')) {
+    if (channel.includes('Invento')) {
         const inventoryManager = new InventoryManager() as any;
         AbstractBaseManager.entity = InventoryEntity;
         AbstractBaseManager.dbConnection = dbConnection;
@@ -228,6 +240,17 @@ async function router(channel: string, payload: any, dbConnection: Connection, a
         AbstractBaseManager.dbConnection = dbConnection;
         AbstractBaseManager.window = actionWindow;
         return await groupManager[channel](payload);
+    }
+
+    /**
+    * Handle Category related events
+    */
+    if (channel.includes('Catego')) {
+        const categoryManager = new CategoryManager() as any;
+        AbstractBaseManager.entity = CategoryEntity;
+        AbstractBaseManager.dbConnection = dbConnection;
+        AbstractBaseManager.window = actionWindow;
+        return await categoryManager[channel](payload);
     }
 
 }

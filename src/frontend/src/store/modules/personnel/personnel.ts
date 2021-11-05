@@ -5,13 +5,13 @@ const state = {
     personnels: <any>[]
 }
 const mutations = {
-    setPersonnel(payload: any) {
+    setPersonnel(state: any, payload: any) {
         return state.personnels.push(payload);
     },
-    setPersonnels(payload: any) {
+    setPersonnels(state: any, payload: any) {
         return state.personnels = [...payload];
     },
-    deletePersonnel(payload: any) {
+    deletePersonnel(state: any, payload: any) {
         return state.personnels.filter((personnel: any) => personnel.id !== payload.id);
     }
 }

@@ -84,6 +84,13 @@ export const AppActionEvents = {
         retrieveSingle: "getSingleNotification",
         delete: "deleteNotification",
     },
+    category:{
+        add: "addCategory",
+        edit: "editCategory",
+        retrieve: "getCategories",
+        retrieveSingle: "getSingleCategory",
+        delete: "deleteCategory",
+    },
     preference:{
         add: "addPreference",
         edit: "editPreference",

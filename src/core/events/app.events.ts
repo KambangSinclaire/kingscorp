@@ -79,6 +79,13 @@ export const AppActionEvents = {
         sendEmail: "sendEmailNotification",
         sendPush: "sendPushNotification"
     },
+    category:{
+        add: "addCategory",
+        edit: "editCategory",
+        retrieve: "getCategories",
+        retrieveSingle: "getSingleCategory",
+        delete: "deleteCategory",
+    },
     preference: {
         add: "addPreference",
         edit: "editPreference",
