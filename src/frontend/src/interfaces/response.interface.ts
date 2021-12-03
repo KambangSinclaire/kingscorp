@@ -8,15 +8,11 @@
  * @description King's is a utility software developed with the management of an enterprise in mind
  */
 
-import { BrowserWindow } from "electron";
 
-/**
- * EXPECTING MORE FIELDS IN THE LONG RUN
- */
 export interface ResponsePayload {
     status: number;
     message: string;
-    data?: [] | {},
+    data: {} | [],
     platform: {
         type: string,
         actionEvent: string

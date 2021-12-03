@@ -1,12 +1,19 @@
+/**
+ * @copyright king's 2021
+ * @author Engineer Kambang Sinclaire
+ * @owner Kingscorp
+ * @contributors 
+ * @license MIT 
+ * @link <https://github.com/KambangSinclaire/kingscorp.git>
+ * @description King's is a utility software developed with the management of an enterprise in mind
+ */
+
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
 import * as IPC_MAIN from "./lib/ipc-manager.lib";
 import { Connection } from "typeorm";
 import config from "./config/app.config";
 import "reflect-metadata";
-
-
-
 class KingsCorp {
 
     private mainWindow: BrowserWindow | any;
@@ -33,7 +40,7 @@ class KingsCorp {
 
             app.on('activate', () => {
                 if (BrowserWindow.getAllWindows().length === 0) {
-                    KingsCorp.createWindow({})
+                    KingsCorp.createWindow({width:2000,height:1500})
                 }
             })
         });
@@ -61,8 +68,8 @@ class KingsCorp {
      */
     public static createWindow(options: { width?: number, height?: number, viewPath?: string, preloadPath?: string }) {
         const win = new BrowserWindow({
-            width: options.width ?? 1000,
-            height: options.height ?? 800,
+            width: options.width ?? 2000,
+            height: options.height ?? 1500,
             webPreferences: {
                 nodeIntegration: true,
                 contextIsolation: false,

@@ -46,12 +46,12 @@ import Pie from "./PieChart.vue";
         datasets: [
           {
             label: "Data One",
-            backgroundColor: "#f87979",
+            backgroundColor: "#8da9c4",
             data: [1, 6, 20, 60, 80, 100, 500],
           },
           {
             label: "Data two",
-            backgroundColor: "#f87979",
+            backgroundColor: "#b4dc7f",
             data: [1, 67, 200, 600, 800, 1000, 5900],
           },
           {
@@ -61,7 +61,7 @@ import Pie from "./PieChart.vue";
           },
           {
             label: "Data four",
-            backgroundColor: "#f87979",
+            backgroundColor: "#feffa5",
             data: [1, 6, 20, 60, 80, 100, 500],
           },
           {
@@ -71,7 +71,7 @@ import Pie from "./PieChart.vue";
           },
           {
             label: "Data six",
-            backgroundColor: "#f87979",
+            backgroundColor: "#8da9c4",
             data: [1, 6, 20, 60, 80, 100, 500],
           },
         ],

@@ -32,7 +32,9 @@
         />
       </div> -->
       <Line :chartdata="chartdata" :options="chartOptions" class="" />
-      <div class="stack-images flex justify-between items-center">
+
+      <!-- COMMENTED FOR A SEASON -->
+      <!-- <div class="stack-images flex justify-between items-center">
         <img
           src="@/assets/feather_icons/user.svg"
           alt="Products"
@@ -41,7 +43,7 @@
         <button class="btn outline-none border rounded-lg px-4 py-2">
           {{ setup?.btnMore }} more
         </button>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -94,18 +96,18 @@ export default class InfoCard extends Vue {
         datasets: [
           {
             label: "Invoices",
-            backgroundColor: "blue",
+            backgroundColor: "#134074",
             data: [1, 16, 210],
             hoverOffset: 4,
           },
           {
             label: "Personnels",
-            backgroundColor: "indigo",
+            backgroundColor: "#feffa5",
             data: [1, 6, 20],
           },
           {
             label: "Inventory",
-            backgroundColor: "pink",
+            backgroundColor: "#b4dc7f",
             data: [179, 67, 20],
           },
           {
@@ -120,7 +122,7 @@ export default class InfoCard extends Vue {
           },
           {
             label: "Services",
-            backgroundColor: "brown",
+            backgroundColor: "#8da9c4",
             data: [134, 69, 20],
           },
         ],

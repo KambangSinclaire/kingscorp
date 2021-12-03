@@ -1,3 +1,12 @@
+/**
+ * @copyright king's 2021
+ * @author Engineer Kambang Sinclaire
+ * @owner Kingscorp
+ * @contributors 
+ * @license MIT 
+ * @link <https://github.com/KambangSinclaire/kingscorp.git>
+ * @description King's is a utility software developed with the management of an enterprise in mind
+ */
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()

@@ -1,3 +1,13 @@
+/**
+ * @copyright king's 2021
+ * @author Engineer Kambang Sinclaire
+ * @owner Kingscorp
+ * @contributors 
+ * @license MIT 
+ * @link <https://github.com/KambangSinclaire/kingscorp.git>
+ * @description King's is a utility software developed with the management of an enterprise in mind
+ */
+
 export const AppActionEvents = {
 
     user: {
@@ -84,18 +94,19 @@ export const AppActionEvents = {
         retrieveSingle: "getSingleNotification",
         delete: "deleteNotification",
     },
-    category:{
+    category: {
         add: "addCategory",
         edit: "editCategory",
         retrieve: "getCategories",
         retrieveSingle: "getSingleCategory",
         delete: "deleteCategory",
     },
-    preference:{
+    preference: {
         add: "addPreference",
         edit: "editPreference",
         retrieve: "getPreferences",
         retrieveSingle: "getSinglePreference",
         delete: "deletePreference",
-    }
+    },
+    API_BASE_URL: "http://localhost:3000/api/vi/app"
 }

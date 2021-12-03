@@ -116,7 +116,7 @@ export default class Welcome extends Vue {
           btnMore: 78,
           bgColor: "bg-yellow-200",
           description:
-            "KingsCorp currently offers photocopy, scanning, printing and graphich design services. Please feel free to contact us for all your documentation needs",
+            "KingsCorp currently offers photocopy, scanning, printing and graphich design services",
           topImage: "fas fa-archive",
           actions: {
             showMore: "show product listing",
@@ -227,19 +227,19 @@ export default class Welcome extends Vue {
           },
         },
         {
-          title: "Notification",
+          title: "Credits",
           range: 60,
           btnMore: 78,
           bgColor: "bg-gray-200",
-          description: "Test Notifications",
-          topImage: "fas fa-user-friends",
+          description: "Test credits",
+          topImage: "fas fa-archive",
           actions: {
             showMore: "show Notification listing",
             showStatistics: "show Notification statistics",
           },
           routes: {
-            toListingView: "/notification",
-            toStatisticsView: "/notification/statistics",
+            toListingView: "/credits",
+            toStatisticsView: "/credits/statistics",
           },
         },
       ],

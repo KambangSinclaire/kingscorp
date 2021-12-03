@@ -1,3 +1,13 @@
+/**
+ * @copyright king's 2021
+ * @author Engineer Kambang Sinclaire
+ * @owner Kingscorp
+ * @contributors 
+ * @license MIT 
+ * @link <https://github.com/KambangSinclaire/kingscorp.git>
+ * @description King's is a utility software developed with the management of an enterprise in mind
+ */
+
 import { createConnection } from "typeorm";
 import { CreditEntity } from "../database/models/entities/credit.entity";
 import { GroupEntity } from "../database/models/entities/group.entity";
